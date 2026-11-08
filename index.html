@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>PIG STRIKE</title>
+<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>WALL STRIKE</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#07090d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 /* ===== PIG STRIKE STYLE GUIDE (all UI must follow this) =====
@@ -244,8 +244,8 @@ ov.className='ui';ov.innerHTML=`<div class=rv><h1>GAME OVER</h1><div class=big2>
 function play(){au();SFX.click();mode='play';[menu,pn,ov,tp].forEach(e=>e.className='ui hid');newRun()}
 function toMenu(){S.map=0;mode='menu';ov.className='ui hid';pn.className='ui hid';menu.className='ui';tp.className='ui';top_()}
 /* ---------- UI ---------- */
-function top_(){const a=ITEM[S.eq.a];tp.innerHTML=`<b class=lg>PIG STRIKE</b><span>$${S.$.toLocaleString()}</span><span>BEST ${S.best}</span>`;tp.append(icon(a,46))}
-function mainMenu(){menu.innerHTML='<h1>PIG<br><i>STRIKE</i></h1>';[['PLAY',play],['INVENTORY',inv],['CASES',cases],['MAPS',maps],['SETTINGS',sets]].forEach(([n,f],i)=>{const b=E('button','b'+(i?' s':''),n);b.onclick=()=>{au();SFX.click();f()};menu.append(b)})}
+function top_(){const a=ITEM[S.eq.a];tp.innerHTML=`<b class=lg>WALL STRIKE</b><span>$${S.$.toLocaleString()}</span><span>BEST ${S.best}</span>`;tp.append(icon(a,46))}
+function mainMenu(){menu.innerHTML='<h1>WALL<br><i>STRIKE</i></h1>';[['PLAY',play],['INVENTORY',inv],['CASES',cases],['MAPS',maps],['SETTINGS',sets]].forEach(([n,f],i)=>{const b=E('button','b'+(i?' s':''),n);b.onclick=()=>{au();SFX.click();f()};menu.append(b)})}
 function panel(title,fn){pn.className='ui';pn.innerHTML=`<div class=ph><h2>${title}</h2><button class="b s sm" id=bk>BACK</button></div><div class=pb></div>`;$('#bk').onclick=()=>{SFX.click();pn.className='ui hid';top_()};fn(pn.querySelector('.pb'));top_()}
 let tab='a';
 function inv(){panel('INVENTORY',b=>{const T={a:'Agents',k:'Knives',g:'Gloves'},cnt=k=>Object.values(ITEM).filter(i=>i.t==k&&S.inv[i.id]).length+'/'+Object.values(ITEM).filter(i=>i.t==k).length;b.append(E('div','tabs',Object.keys(T).map(k=>`<button class="tb ${k==tab?'on':''}" data-k=${k}>${T[k]} <small>${cnt(k)}</small></button>`).join('')));b.querySelectorAll('.tb').forEach(x=>x.onclick=()=>{tab=x.dataset.k;SFX.click();inv()});
@@ -262,7 +262,7 @@ ov.innerHTML=`<div class=rv style="--c:${col}"><div class=glow></div><h3 style="
 function maps(){panel('MAPS',b=>{const w=E('div','big');MAPS.forEach((m,i)=>{const un=S.best>=m.u,d=E('div','card'+(S.map==i?' sel':'')+(un?'':' off'),`<div class=mp style="background:linear-gradient(${m.sky[0]},${m.sky[1]} 60%,${m.gr})">${m.n}</div><p>${un?'Payout x'+m.m+' · '+MODS[i]:'LOCKED · Reach score '+m.u}</p>`);d.style.setProperty('--c',m.c);d.style.cursor=un?'pointer':'default';if(un)d.onclick=()=>{S.map=i;save();SFX.click();maps()};w.append(d)});b.append(w)})}
 let rs=0;function sets(){panel('SETTINGS',b=>{const d=E('div','set',`<label>Volume <input type=range min=0 max=100 value=${S.vol*100}></label>`);d.querySelector('input').oninput=e=>{S.vol=e.target.value/100;save();SFX.click()};
 const mu=E('button','b s sm',S.mute?'SOUND: OFF':'SOUND: ON');mu.onclick=()=>{S.mute=!S.mute;save();sets();SFX.click()};const rb=E('button','b d sm',rs?'CLICK AGAIN TO CONFIRM':'RESET PROGRESS');rb.onclick=()=>{if(rs){S=DEF();save();rs=0;toMenu();pn.className='ui hid'}else{rs=1;sets()}};
-d.append(mu,rb,E('p','','<small style="color:#8b95a8">Tap the opposite half = long jump · tap your own wall side = hop · tap in air = 2x jump. Keys: SPACE/W jump, A/D or arrows pick a side, P pauses, ESC ends run. Shield pickup saves you once.</small>'));b.append(d)})}
+const fb=E('button','b s sm','FULLSCREEN (F)');fb.onclick=()=>{SFX.click();const D=document;try{D.fullscreenElement?D.exitFullscreen():D.documentElement.requestFullscreen()}catch(_){}};d.append(mu,fb,rb,E('p','','<small style="color:#8b95a8">Tap the opposite half = long jump · tap your own wall side = hop · tap in air = 2x jump. Keys: SPACE/W jump, A/D or arrows pick a side, P pauses, ESC ends run. Shield pickup saves you once.</small>'));b.append(d)})}
 /* ---------- LOOP / INPUT ---------- */
 addEventListener('keydown',e=>{const c=e.code;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(c))e.preventDefault();if(e.repeat)return;if(c=='KeyF'){const d=document,r=d.documentElement;try{d.fullscreenElement?d.exitFullscreen():r.requestFullscreen&&r.requestFullscreen()}catch(_){}return}
 if(mode=='play'&&G.pause){if(c=='KeyP'||c=='Space'||c=='Enter')G.pause=0;else if(c=='Escape')die(1);return}if(mode=='play'){if(c=='KeyP'){if(!G.dead)G.pause=1;return}if(c=='Space'||c=='ArrowUp'||c=='KeyW')jump(0);else if(c=='ArrowLeft'||c=='KeyA')jump(-1);else if(c=='ArrowRight'||c=='KeyD')jump(1);else if(c=='Escape'&&!G.dead)die(1)}
@@ -277,8 +277,10 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 function fit(){const s=Math.min(innerWidth/W,innerHeight/H),d=window.devicePixelRatio||1,k=Math.round(clamp(s*d*QL,1,2)*4)/4;st.style.transform=`scale(${s}) translate(-360px,-640px)`;UK=Math.min(3,Math.max(1,Math.ceil(s*d)));if(k!==RK||C.width!==Math.round(W*k)){RK=k;C.width=Math.round(W*k);C.height=Math.round(H*k)}}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.visualViewport)visualViewport.addEventListener('resize',fit);fit();
 let last=performance.now();
-function loop(now){const raw=now-last,dt=Math.min(.05,raw/1000);last=now;X.setTransform(RK,0,0,RK,0,0);fe=fe*.95+Math.min(raw,100)*.05;if(++fc>120){fc=0;if(fe>28&&QL>.55){QL-=.15;fit()}}const m=MAPS[S.map],t=now/1000;
+function loop(now){const raw=now-last,dt=Math.min(.05,raw/1000);last=now;X.setTransform(RK,0,0,RK,0,0);fe=fe*.95+Math.min(raw,100)*.05;if(++fc>120){fc=0;if(fe>28&&QL>.55){QL-=.15;fit()}}const m=MAPS[S.map],t=now/1000;if(bgm!==S.map){bgm=S.map;bgsync()}
 if(mode=='menu'){off+=70*dt;scene(m,off,t);X.save();X.translate(360,520);X.scale(2.4,2.4);animal(X,ITEM[S.eq.a].k,{t,ph:t*5,ka:-.35+Math.sin(t*2)*.1});X.restore();fx(m)}
 else if(G){if(!G.pause)upd(dt);drw(m,t);if(G.pause){X.fillStyle='#000b';X.fillRect(0,0,W,H);X.fillStyle='#fff';X.textAlign='center';X.font='900 80px "Segoe UI",Arial';X.fillText('PAUSED',W/2,H/2-10);X.font='700 26px "Segoe UI",Arial';X.fillText('TAP / SPACE = RESUME · ESC = END RUN',W/2,H/2+50)}}requestAnimationFrame(loop)}
+let bgm=-1;function bgsync(){const m=MAPS[S.map],v=`linear-gradient(#000b,#000d),radial-gradient(ellipse at 50% 35%,${m.sky[1]},transparent 75%),linear-gradient(${m.sky[0]},${m.sky[1]} 55%,${m.sky[2]})`;document.documentElement.style.background=v;document.body.style.background=v}
+let fsT=0;addEventListener('pointerdown',e=>{if(fsT||e.pointerType=='touch'||!matchMedia('(pointer:fine)').matches)return;fsT=1;try{const r=document.documentElement;if(!document.fullscreenElement&&r.requestFullscreen)r.requestFullscreen().catch(()=>{})}catch(_){}});
 S.map=0;mainMenu();top_();requestAnimationFrame(loop);
 </script></body></html>
