@@ -62,7 +62,8 @@ html,body{height:100vh;height:100dvh}
 canvas{touch-action:none}
 button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .pb{touch-action:pan-y;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-#st{will-change:transform;backface-visibility:hidden}
+#st{position:fixed;left:0;top:0;will-change:transform;backface-visibility:hidden}
+#cv{width:720px;height:1280px}
 @media (hover:none){.cd:hover,.card:hover{transform:none;box-shadow:none}.b:hover,.tb:hover{filter:none;transform:none}.b:active,.tb:active{transform:scale(.96)}}
 @media (prefers-reduced-motion:reduce){#menu h1 i{animation:none}}
 </style></head><body>
@@ -274,7 +275,7 @@ document.addEventListener('gesturestart',e=>e.preventDefault());
 document.addEventListener('touchmove',e=>{if(!(e.target.closest&&e.target.closest('.pb')))e.preventDefault()},{passive:false});
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(b)b.blur()},true);
 ['pointerup','touchend','keydown'].forEach(v=>addEventListener(v,()=>au(),{passive:true}));
-function fit(){const s=Math.min(innerWidth/W,innerHeight/H),d=window.devicePixelRatio||1,k=Math.round(clamp(s*d*QL,1,2)*4)/4;st.style.transform=`scale(${s}) translate(-360px,-640px)`;UK=Math.min(3,Math.max(1,Math.ceil(s*d)));if(k!==RK||C.width!==Math.round(W*k)){RK=k;C.width=Math.round(W*k);C.height=Math.round(H*k)}}
+function fit(){const s=Math.min(innerWidth/W,innerHeight/H),d=window.devicePixelRatio||1,k=Math.round(clamp(s*d*QL,1,2)*4)/4;st.style.transform=`translate(${(innerWidth-W*s)/2}px,${(innerHeight-H*s)/2}px) scale(${s})`;UK=Math.min(3,Math.max(1,Math.ceil(s*d)));if(k!==RK||C.width!==Math.round(W*k)){RK=k;C.width=Math.round(W*k);C.height=Math.round(H*k)}}
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.visualViewport)visualViewport.addEventListener('resize',fit);fit();
 let last=performance.now();
 function loop(now){const raw=now-last,dt=Math.min(.05,raw/1000);last=now;X.setTransform(RK,0,0,RK,0,0);fe=fe*.95+Math.min(raw,100)*.05;if(++fc>120){fc=0;if(fe>28&&QL>.55){QL-=.15;fit()}}const m=MAPS[S.map],t=now/1000;if(bgm!==S.map){bgm=S.map;bgsync()}
