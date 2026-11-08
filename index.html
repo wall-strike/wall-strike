@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>PIG STRIKE</title>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#07090d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 /* ===== PIG STRIKE STYLE GUIDE (all UI must follow this) =====
  COLORS   --ac accent gold, --s1/--s2 surfaces, --ln hairline, --mu muted text, --bad red, --gold, --info cyan
@@ -11,7 +11,7 @@
 --r:10px;--sh:0 8px 22px #000a;--glow:0 0 18px #f5a52488;--ft:'Segoe UI',Roboto,Arial,sans-serif;--t:.18s;
 --surf:linear-gradient(160deg,color-mix(in srgb,var(--c,#555) 34%,#161c28),var(--s2) 85%);
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html,body{height:100%;margin:0;background:var(--bg);color:var(--tx);overflow:hidden;font-family:var(--ft);user-select:none;touch-action:manipulation}
+html,body{height:100%;margin:0;background:radial-gradient(ellipse at 50% 30%,#141b29,#07090d 70%) #07090d;color:var(--tx);overflow:hidden;font-family:var(--ft);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none;touch-action:manipulation}
 #st{position:absolute;left:50%;top:50%;width:720px;height:1280px;transform-origin:0 0;overflow:hidden}
 canvas{display:block}#cv{position:absolute;inset:0}
 .ui{position:absolute;inset:0;transition:opacity .35s,transform .35s}.hid{opacity:0;pointer-events:none;transform:scale(1.03)}
@@ -58,13 +58,21 @@ h1,h2,h3{margin:0;text-transform:uppercase;font-weight:800}
 .ri{width:130px;height:156px;text-align:center;flex:none}.ri small{display:block;font-size:12px;color:#c7d0e0;white-space:nowrap;overflow:hidden}
 .mk{position:absolute;left:339px;top:0;bottom:0;width:3px;background:var(--ac);z-index:3;box-shadow:0 0 12px var(--ac)}
 input[type=range]{width:340px;accent-color:var(--ac)}.set{display:flex;flex-direction:column;gap:22px;align-items:flex-start;font-size:22px}
+html,body{height:100vh;height:100dvh}
+canvas{touch-action:none}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.pb{touch-action:pan-y;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#st{will-change:transform;backface-visibility:hidden}
+@media (hover:none){.cd:hover,.card:hover{transform:none;box-shadow:none}.b:hover,.tb:hover{filter:none;transform:none}.b:active,.tb:active{transform:scale(.96)}}
+@media (prefers-reduced-motion:reduce){#menu h1 i{animation:none}}
 </style></head><body>
 <div id="st"><canvas id="cv" width="720" height="1280"></canvas>
 <div id="top" class="ui"></div><div id="menu" class="ui"></div><div id="pn" class="ui hid"></div><div id="ov" class="ui hid"></div></div>
 <script>
 'use strict';
 const W=720,H=1280,LX=84,RX=636,R=34,$=s=>document.querySelector(s),E=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
-const C=$('#cv'),X=C.getContext('2d'),tp=$('#top'),menu=$('#menu'),pn=$('#pn'),ov=$('#ov'),st=$('#st');
+const C=$('#cv'),X=C.getContext('2d',{alpha:false}),tp=$('#top'),menu=$('#menu'),pn=$('#pn'),ov=$('#ov'),st=$('#st');let QL=1,RK=1,UK=1,fe=16,fc=0;
+try{const sbd=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'shadowBlur');Object.defineProperty(X,'shadowBlur',{get(){return sbd.get.call(X)},set(v){sbd.set.call(X,QL<.8?0:v)},configurable:true})}catch(e){};
 const DEF=()=>({$:0,best:0,inv:{'a:donk':1,'k:karambit:0':1},eq:{a:'a:donk',k:'k:karambit:0',g:null},map:0,vol:.6,mute:false});
 let S;try{S=Object.assign(DEF(),JSON.parse(localStorage.getItem('pigstrike')||'{}'))}catch(e){S=DEF()}
 const save=()=>{try{localStorage.setItem('pigstrike',JSON.stringify(S))}catch(e){}};
@@ -131,7 +139,7 @@ if(k=='frog'){[-8,16].forEach((x,i)=>{el(x,-28-i*2,11,11,A.a);el(x,-28-i*2,9,9,'
 if(k!='frog'&&!AS[k]){const bl=(t%3.4)<.12;[6,22].forEach(x=>{if(bl){c.strokeStyle='#111';c.lineWidth=2;c.beginPath();c.moveTo(x-5,-10);c.lineTo(x+5,-10);c.stroke()}else{el(x,-10,5.5,6.5,'#fff');el(x+1.8,-9.5,3,3.6,'#111');el(x+2.6,-11,1,1,'#fff')}})}
 if(!o.nk&&k!='ghost'&&!AS[k]){c.save();c.rotate(.18);c.fillStyle='#1a1d26';c.beginPath();c.ellipse(0,-r+3,20,5,0,0,7);c.fill();c.fillRect(-12,-r-17,24,20);c.fillStyle='#c0392b';c.fillRect(-12,-r-2,24,4);c.restore()}if(!o.nk){c.save();c.translate(26,16);c.rotate(o.ka==null?-.4:o.ka);c.save();c.translate(0,-6);knife(c,ITEM[S.eq.k].s,ITEM[S.eq.k].f,72);c.restore();glove(c,S.eq.g?ITEM[S.eq.g]:null,9,A);c.restore()}
 c.restore()}
-function icon(it,z){const cv=E('canvas');cv.width=cv.height=z;const c=cv.getContext('2d');c.translate(z/2,z/2);c.scale(z/110,z/110);
+function icon(it,z){const cv=E('canvas');cv.width=cv.height=z*UK;cv.style.width=cv.style.height=z+'px';const c=cv.getContext('2d');c.scale(UK,UK);c.translate(z/2,z/2);c.scale(z/110,z/110);
 if(it.t=='a')animal(c,it.k,{nk:1,t:1});else if(it.t=='k'){const kc=kimg(it.f);if(kc){const w=104,h=w*kc.height/kc.width;c.rotate(-.12);c.drawImage(kc,-w/2,-h/2,w,h)}else{c.rotate(.7);c.scale(.85,.85);c.translate(0,21);knife(c,it.s,it.f,76)}}else if(it.img){const w=96,h=w*GV.naturalHeight/GV.naturalWidth;c.drawImage(GV,-w/2,-h/2,w,h)}else if(it.c){c.scale(1.7,1.7);glove(c,it,26,AN.pig)}else{c.fillStyle='#667';c.font='bold 50px "Segoe UI",Arial';c.textAlign='center';c.fillText('✕',0,16)}return cv}
 /* ---------- DRAWING: WORLD ---------- */
 let BY=0;const rnd=n=>{const x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x)};
@@ -177,7 +185,7 @@ X.globalCompositeOperation='overlay';X.fillStyle=['#ffb04a55','#ff5a1a66','#ffe0
 /* ---------- GAME (vertical wall-jump) ---------- */
 let mode='menu',G,off=0;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),sy=y=>H-(y-G.cam),sawX=o=>W/2+Math.sin(G.t*2.2+o.ph)*(RX-LX)*.38;
-function newRun(){G={t:0,cam:0,x:LX+R,y:380,vx:0,vy:0,side:-1,jumps:0,maxY:380,sq:0,bonus:0,score:0,cash:0,combo:0,ct:0,obs:[],coins:[],pts:[],txt:[],ny:1300,dead:false,pause:0,sh:0,inv:0,tr:[],dt:0,shake:0,sl:0,face:1}}
+function newRun(){S.map=0;G={t:0,cam:0,x:LX+R,y:380,vx:0,vy:0,side:-1,jumps:0,maxY:380,sq:0,bonus:0,score:0,cash:0,combo:0,ct:0,obs:[],coins:[],pts:[],txt:[],ny:1300,dead:false,pause:0,sh:0,inv:0,tr:[],dt:0,shake:0,sl:0,face:1}}
 function mult(){return 1+Math.min(3,Math.floor(G.combo/5)*.5)}
 function burst(x,y,n,col,sp=300){for(let i=0;i<n;i++){const a=Math.random()*7,v=Math.random()*sp;G.pts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-80,l:.5+Math.random()*.5,c:col,s:2+Math.random()*4})}}
 function ftx(x,y,s,c='#ffd700'){G.txt.push({x,y,s,c,l:1})}
@@ -234,7 +242,7 @@ X.textAlign='center';X.font='700 20px "Segoe UI",Arial';X.fillStyle='#fff9';X.fi
 function end(){mode='over';const m=MAPS[S.map],bonus=Math.floor(G.score*.02*m.m),gain=G.cash+bonus,old=S.best;S.$+=gain;S.best=Math.max(S.best,G.score);const nu=MAPS.filter(x=>x.u>old&&x.u<=S.best);save();
 ov.className='ui';ov.innerHTML=`<div class=rv><h1>GAME OVER</h1><div class=big2>${G.score}</div>${G.score>old&&old>0?'<p class=gold>NEW BEST</p>':''}<p>Best ${S.best} · Coins $${G.cash} · Score bonus $${bonus}</p><p class=gold>Total +$${gain}</p>${nu.map(x=>`<p class=gold>MAP UNLOCKED: ${x.n}</p>`).join('')}<div class=row><button class=b id=rt>RETRY</button><button class="b s" id=mn>MENU</button></div></div>`;$('#rt').onclick=play;$('#mn').onclick=toMenu}
 function play(){au();SFX.click();mode='play';[menu,pn,ov,tp].forEach(e=>e.className='ui hid');newRun()}
-function toMenu(){mode='menu';ov.className='ui hid';pn.className='ui hid';menu.className='ui';tp.className='ui';top_()}
+function toMenu(){S.map=0;mode='menu';ov.className='ui hid';pn.className='ui hid';menu.className='ui';tp.className='ui';top_()}
 /* ---------- UI ---------- */
 function top_(){const a=ITEM[S.eq.a];tp.innerHTML=`<b class=lg>PIG STRIKE</b><span>$${S.$.toLocaleString()}</span><span>BEST ${S.best}</span>`;tp.append(icon(a,46))}
 function mainMenu(){menu.innerHTML='<h1>PIG<br><i>STRIKE</i></h1>';[['PLAY',play],['INVENTORY',inv],['CASES',cases],['MAPS',maps],['SETTINGS',sets]].forEach(([n,f],i)=>{const b=E('button','b'+(i?' s':''),n);b.onclick=()=>{au();SFX.click();f()};menu.append(b)})}
@@ -256,15 +264,21 @@ let rs=0;function sets(){panel('SETTINGS',b=>{const d=E('div','set',`<label>Volu
 const mu=E('button','b s sm',S.mute?'SOUND: OFF':'SOUND: ON');mu.onclick=()=>{S.mute=!S.mute;save();sets();SFX.click()};const rb=E('button','b d sm',rs?'CLICK AGAIN TO CONFIRM':'RESET PROGRESS');rb.onclick=()=>{if(rs){S=DEF();save();rs=0;toMenu();pn.className='ui hid'}else{rs=1;sets()}};
 d.append(mu,rb,E('p','','<small style="color:#8b95a8">Tap the opposite half = long jump · tap your own wall side = hop · tap in air = 2x jump. Keys: SPACE/W jump, A/D or arrows pick a side, P pauses, ESC ends run. Shield pickup saves you once.</small>'));b.append(d)})}
 /* ---------- LOOP / INPUT ---------- */
-addEventListener('keydown',e=>{const c=e.code;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(c))e.preventDefault();if(e.repeat)return;
+addEventListener('keydown',e=>{const c=e.code;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(c))e.preventDefault();if(e.repeat)return;if(c=='KeyF'){const d=document,r=d.documentElement;try{d.fullscreenElement?d.exitFullscreen():r.requestFullscreen&&r.requestFullscreen()}catch(_){}return}
 if(mode=='play'&&G.pause){if(c=='KeyP'||c=='Space'||c=='Enter')G.pause=0;else if(c=='Escape')die(1);return}if(mode=='play'){if(c=='KeyP'){if(!G.dead)G.pause=1;return}if(c=='Space'||c=='ArrowUp'||c=='KeyW')jump(0);else if(c=='ArrowLeft'||c=='KeyA')jump(-1);else if(c=='ArrowRight'||c=='KeyD')jump(1);else if(c=='Escape'&&!G.dead)die(1)}
 else if(mode=='over'){if(c=='Space'||c=='Enter')play();else if(c=='Escape')toMenu()}});
-C.addEventListener('pointerdown',e=>{au();if(mode!='play')return;const r=C.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;if(G.pause){G.pause=0;return}if(px>.86&&py<.1&&!G.dead){G.pause=1;return}jump(px<.5?-1:1)});
+C.addEventListener('pointerdown',e=>{au();if(mode!='play')return;e.preventDefault();const r=C.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;if(G.pause){G.pause=0;return}if(px>.86&&py<.1&&!G.dead){G.pause=1;return}jump(px<.5?-1:1)});
 const ap=()=>{if(mode=='play'&&G&&!G.dead)G.pause=1};addEventListener('blur',ap);document.addEventListener('visibilitychange',()=>{if(document.hidden)ap()});
-function fit(){st.style.transform=`scale(${Math.min(innerWidth/W,innerHeight/H)}) translate(-360px,-640px)`}addEventListener('resize',fit);fit();
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('gesturestart',e=>e.preventDefault());
+document.addEventListener('touchmove',e=>{if(!(e.target.closest&&e.target.closest('.pb')))e.preventDefault()},{passive:false});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(b)b.blur()},true);
+['pointerup','touchend','keydown'].forEach(v=>addEventListener(v,()=>au(),{passive:true}));
+function fit(){const s=Math.min(innerWidth/W,innerHeight/H),d=window.devicePixelRatio||1,k=Math.round(clamp(s*d*QL,1,2)*4)/4;st.style.transform=`scale(${s}) translate(-360px,-640px)`;UK=Math.min(3,Math.max(1,Math.ceil(s*d)));if(k!==RK||C.width!==Math.round(W*k)){RK=k;C.width=Math.round(W*k);C.height=Math.round(H*k)}}
+addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));if(window.visualViewport)visualViewport.addEventListener('resize',fit);fit();
 let last=performance.now();
-function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;const m=MAPS[S.map],t=now/1000;
+function loop(now){const raw=now-last,dt=Math.min(.05,raw/1000);last=now;X.setTransform(RK,0,0,RK,0,0);fe=fe*.95+Math.min(raw,100)*.05;if(++fc>120){fc=0;if(fe>28&&QL>.55){QL-=.15;fit()}}const m=MAPS[S.map],t=now/1000;
 if(mode=='menu'){off+=70*dt;scene(m,off,t);X.save();X.translate(360,520);X.scale(2.4,2.4);animal(X,ITEM[S.eq.a].k,{t,ph:t*5,ka:-.35+Math.sin(t*2)*.1});X.restore();fx(m)}
 else if(G){if(!G.pause)upd(dt);drw(m,t);if(G.pause){X.fillStyle='#000b';X.fillRect(0,0,W,H);X.fillStyle='#fff';X.textAlign='center';X.font='900 80px "Segoe UI",Arial';X.fillText('PAUSED',W/2,H/2-10);X.font='700 26px "Segoe UI",Arial';X.fillText('TAP / SPACE = RESUME · ESC = END RUN',W/2,H/2+50)}}requestAnimationFrame(loop)}
-mainMenu();top_();requestAnimationFrame(loop);
+S.map=0;mainMenu();top_();requestAnimationFrame(loop);
 </script></body></html>
