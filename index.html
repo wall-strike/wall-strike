@@ -210,7 +210,7 @@ function pick(c){if(c.sh){G.sh=1;ftx(c.x,sy(c.y)-20,'SHIELD!','#6ff');burst(c.x,
 function upd(dt){const m=MAPS[S.map];G.t+=dt;G.pts.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=700*dt;p.l-=dt});G.pts=G.pts.filter(p=>p.l>0);G.txt.forEach(t=>{t.y-=50*dt;t.l-=dt});G.txt=G.txt.filter(t=>t.l>0);G.shake*=.9;
 if(G.dead){G.dt+=dt;if(G.dt>.9&&mode=='play')end();return}
 G.sq*=.85;G.inv=Math.max(0,G.inv-dt);if(!G.side)G.tr.push({x:G.x,y:G.y,l:.3});G.tr.forEach(p=>p.l-=dt);G.tr=G.tr.filter(p=>p.l>0);G.sl=Math.max(0,G.sl-dt);if((G.ct-=dt)<=0)G.combo=0;
-G.cam+=(120+Math.min(260,G.maxY/32))*m.sp*dt;while(G.ny<G.cam+H+500)spawn(m);
+G.cam+=(80+Math.min(160,G.maxY/50))*m.sp*dt;while(G.ny<G.cam+H+500)spawn(m);
 if(G.side)G.y-=70*dt;else{G.vy-=1800*(m.g||1)*dt;G.y+=G.vy*dt;G.x+=G.vx*dt;const w=G.x<=LX+R?-1:G.x>=RX-R?1:0;
  if(w){G.x=w<0?LX+R:RX-R;G.vx=0;if(G.vy<=0){G.side=w;G.vy=0;G.jumps=0;G.sq=.5;SFX.land();burst(G.x-w*R,sy(G.y),8,'#fff6',160)}}}
 if(G.y>G.cam+H*.62)G.cam=G.y-H*.62;G.maxY=Math.max(G.maxY,G.y);G.score=Math.max(0,Math.floor((G.maxY-380)/8))+G.bonus;for(let i=MAPS.length-1;i>S.map;i--)if(G.score>=MAPS[i].u){S.map=i;save();ftx(W/2,340,'NEW MAP: '+MAPS[i].n,'#8fe0ff');G.mb={n:MAPS[i].n,t0:G.t};G.txt[G.txt.length-1].l=2.5;burst(W/2,300,30,'#8fe0ff',400);SFX.rare(3);break}
