@@ -262,7 +262,9 @@ const SW_PX=18,SW_MS=80;let swp=null;
 function tapJump(e,t){if(e.pointerType!='touch'){jump(t);return}if(swp){clearTimeout(swp.h);jump(swp.t)}const o={id:e.pointerId,x:e.clientX,y:e.clientY,t};o.h=setTimeout(()=>{if(swp===o){swp=null;jump(t)}},SW_MS);swp=o}
 C.addEventListener('pointermove',e=>{if(!swp||e.pointerId!=swp.id)return;const dx=e.clientX-swp.x,dy=e.clientY-swp.y;if(dy>SW_PX&&dy>Math.abs(dx)*1.2){clearTimeout(swp.h);swp=null;slide()}});
 ['pointerup','pointercancel'].forEach(v=>C.addEventListener(v,e=>{if(!swp||e.pointerId!=swp.id)return;clearTimeout(swp.h);const t=swp.t;swp=null;jump(t)}));
-const ap=()=>{if(mode=='play'&&G&&!G.dead)G.pause=1};addEventListener('blur',ap);document.addEventListener('visibilitychange',()=>{if(document.hidden)ap()});
+// Browsers may drop offscreen canvas contents after a long idle, so rebuild the cached knife/digit canvases on return
+const rc=()=>{for(const k in KC)delete KC[k];for(const k in DGC)delete DGC[k]};addEventListener('focus',rc);addEventListener('pageshow',rc);
+const ap=()=>{if(mode=='play'&&G&&!G.dead)G.pause=1};addEventListener('blur',ap);document.addEventListener('visibilitychange',()=>{if(document.hidden)ap();else rc()});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('gesturestart',e=>e.preventDefault());
 document.addEventListener('touchmove',e=>{if(!(e.target.closest&&e.target.closest('.pb')))e.preventDefault()},{passive:false});

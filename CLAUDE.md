@@ -38,7 +38,7 @@ Pozn.: `kimg()` má natvrdo výjimku pro nůž `karambit` (přebarvení finishe 
 - Změnu dělej co nejmenší a cílenou. Neopravuj „při té příležitosti“ nesouvisející věci, jen je navrhni.
 - Před přepsáním textu v `js/game.js` (nebo `css/style.css`) ověř, že hledaný řetězec je v souboru právě jednou. Při úpravě skriptem použij kontrolu počtu výskytů.
 - Žádné neošetřené `localStorage`/`JSON.parse`, vždy `try/catch`.
-- Po změně obrázků nebo souborů v cache zvyš verzi v `sw.js` (`wall-strike-vN`, teď v17) a nový soubor přidej do `FILES`.
+- Po změně obrázků nebo souborů v cache zvyš verzi v `sw.js` (`wall-strike-vN`, teď v18) a nový soubor přidej do `FILES`.
 
 ## Uložení (localStorage)
 - Uložení se při startu načítá přes `loadSave()`, která ověřuje tvar (typy `inv`, `eq`, čísla). Poškozený nebo neúplný záznam se před opravou zazálohuje do klíče `pigstrike_bak`. Nové pole v `S` přidej i sem.
