@@ -49,7 +49,7 @@ Pozn.: `kimg()` má natvrdo výjimku pro nůž `karambit` (přebarvení finishe 
 
 ## Ekonomika (neměň bez dohody, hlídej poměry)
 - Ceny bedýnek: Agent 400, Knife 300, Gloves 400. Vrácení za duplikát (`REF`) musí být **vždy hluboko pod cenou bedýnky**, jinak vznikne nekonečné vydělávání. Po každé změně položek nebo `REF` spočítej průměrné vrácení pro každou bedýnku a ověř, že je výrazně nižší než její cena.
-- **Gemy** (`S.gems`): druhá měna, 1 gem za každý modrý diamant (`c.g`) nasbíraný za běh, připíše se na konci runu v `end()`. Utrácí se jen v Gem Shopu (druhá stránka obchodu, `gemPage()`, `buyGem()`) za agenty s `gem:N` (Monesy, ZywOo, Donk, ropz a frozen po 500; padají i z Agent Case, takže by jinak byla prázdná). Diamant padá zhruba v 12 % oblouků mincí. Ceny nejsou odladěné na reálné hraní, uprav je v `SKINS`.
+- **Gemy** (`S.gems`): druhá měna, 1 gem za každý modrý diamant (`c.g`) nasbíraný za běh, připíše se na konci runu v `end()`. Utrácí se jen v Gem Shopu (druhá stránka obchodu, `gemPage()`, `buyGem()`) za agenty s `gem:N` (Monesy, ZywOo a Donk po 500; padají i z Agent Case, takže by jinak byla prázdná). Diamant padá zhruba v 12 % oblouků mincí. Ceny nejsou odladěné na reálné hraní, uprav je v `SKINS`.
 - Příjem: hodnota mince = `1` (zlatá `8`) × násobič kombo × násobič mapy. Bonus na konci runu 1,5 % skóre × mapa.
 - Do bedýnky nikdy nedávej jedinou položku (po prvním otevření je vždy duplikát).
 
