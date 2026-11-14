@@ -22,8 +22,8 @@ Hra si sama vybere rozložení podle obrazovky. Na **PC** (okno na šířku) bě
 | Hop na vlastní zdi | klepnutí na vlastní stranu | `A` / `D` nebo šipky |
 | Sklouznutí / skok dolů | tah prstem dolů | `S` / `↓` |
 | Dvojitý skok | klepnutí ve vzduchu | `Space` / `W` ve vzduchu |
-| Pauza | tlačítko vpravo nahoře | `P` |
-| Ukončit běh | – | `Esc` |
+| Pauza (menu: pokračovat, restart, zvuk, lobby) | tlačítko vpravo nahoře | `P` / `Esc` |
+| Ukončit běh | – | `Q` v pauze (`L` = lobby) |
 | Celá obrazovka | Nastavení | `F` nebo Nastavení |
 
 Kombo (sbírání mincí a prolétávání překážek bez pádu) násobí výdělek z mincí. Mapy se odemykají podle nejlepšího skóre.
@@ -32,7 +32,7 @@ Kombo (sbírání mincí a prolétávání překážek bez pádu) násobí výd�
 
 - **Play** – začne běh.
 - **Inventory** – vybereš si agenta, nůž a rukavice (zamčené věci získáš z bedýnek).
-- **Shop** – dvě stránky (přejeď doprava, klikni na záložku nebo použij ←/→). Na první se po kliknutí na bedýnku nejdřív ukážou šance všech předmětů a až pak ji otevřeš za mince (duplikát vrátí část peněz). Na druhé, **Gem Shopu**, koupíš za 500 gemů agenty Monesy, ZywOo a Donk.
+- **Shop** – dvě stránky (přejeď doprava, klikni na záložku nebo použij ←/→). Na první se po kliknutí na bedýnku nejdřív ukážou šance všech předmětů a až pak ji otevřeš za mince (duplikát vrátí část peněz). Na druhé, **Gem Shopu**, koupíš za 500 gemů agenty Monesy, ZywOo, Donk, ropz a frozen.
 - **Maps** – seznam map a odměn; mapa se odemyká dosaženým skóre.
 - **Settings** – hlasitost, zvuk, celá obrazovka a reset postupu.
 
