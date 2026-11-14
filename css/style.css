@@ -50,7 +50,7 @@ h1,h2,h3{margin:0;text-transform:uppercase;font-weight:800}
 #ov{display:flex;align-items:center;justify-content:center;background:#000a}
 .rv{text-align:center;position:relative;animation:pp .35s ease-out}@keyframes pp{from{transform:scale(.85);opacity:0}}
 .rv h1{color:var(--bad);text-shadow:0 0 30px #eb4b4b88}.rv .big2{font-size:84px;font-weight:900}.rv p{font-size:28px;margin:6px}.rv h2{margin:8px;font-size:38px;letter-spacing:.1em}.rv h3{font-size:26px;letter-spacing:.15em}
-.row{display:flex;gap:20px;justify-content:center;margin-top:26px}#bg canvas{margin:0 auto}
+.row{display:flex;gap:20px;justify-content:center;margin-top:26px}.pz h1{color:var(--tx);text-shadow:0 0 30px #fff3}.pz .col{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:28px}.pz .b{width:440px;min-height:72px;font-size:28px}.pz p{margin-top:22px}.pt .pz .b{width:380px;min-height:64px;font-size:24px}#bg canvas{margin:0 auto}
 .glow{position:absolute;left:50%;top:150px;width:420px;height:420px;margin-left:-210px;border-radius:50%;background:radial-gradient(var(--c),#0000 68%);animation:gl 1.2s ease-out;opacity:.8}@keyframes gl{from{transform:scale(0)}to{transform:scale(1)}}
 .rl{width:var(--rw,680px);height:196px;overflow:hidden;position:relative;background:var(--s2)}.tr{display:flex;gap:8px;padding:6px 0 0 0;width:max-content}
 .ri{width:130px;height:182px;text-align:center;flex:none}.ri small{display:block;line-height:1.15;min-height:2.3em;font-size:13px;color:#c7d0e0;white-space:nowrap;overflow:hidden}
