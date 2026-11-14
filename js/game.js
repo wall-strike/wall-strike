@@ -14,10 +14,10 @@ try{const sbd=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype
  img: image path under assets/ (without extension, .webp); col: agent colours {a,b,d} or glove colours [main,dark] */
 const SKINS=[
 {t:'a',id:'donk',n:'Donk',r:6,gem:500,fix:.0025,img:'agents/donk',col:{a:'#efd8d0',b:'#c9a89a',d:'#54463a'}},
-{t:'a',id:'curly',n:'ZywOo',r:5,gem:500,fix:.0025,img:'agents/curly',col:{a:'#e8a888',b:'#c88868',d:'#5a2f1a'}},
-{t:'a',id:'monesy',n:'Monesy',r:4,gem:500,fix:.0025,img:'agents/monesy',col:{a:'#e0bda7',b:'#c49a80',d:'#5a3a22'}},
-{t:'a',id:'ropz',n:'ropz',r:4,gem:500,fix:.0025,img:'agents/ropz',col:{a:'#e2c3c3',b:'#c49a9a',d:'#7a3a12'}},
-{t:'a',id:'frozen',n:'frozen',r:4,gem:500,fix:.0025,img:'agents/frozen',col:{a:'#e2c3c3',b:'#c49a9a',d:'#7a3a12'}},
+{t:'a',id:'curly',n:'ZywOo',r:6,gem:500,fix:.0025,img:'agents/curly',col:{a:'#e8a888',b:'#c88868',d:'#5a2f1a'}},
+{t:'a',id:'monesy',n:'Monesy',r:6,gem:500,fix:.0025,img:'agents/monesy',col:{a:'#e0bda7',b:'#c49a80',d:'#5a3a22'}},
+{t:'a',id:'ropz',n:'ropz',r:5,z:.8,fix:.01,img:'agents/ropz',col:{a:'#e2c3c3',b:'#c49a9a',d:'#7a3a12'}},
+{t:'a',id:'frozen',n:'frozen',r:5,z:.8,fix:.01,img:'agents/frozen',col:{a:'#e2c3c3',b:'#c49a9a',d:'#7a3a12'}},
 {t:'a',id:'camo',n:'Camo',r:0,def:1,fill:1,eq:1,img:'agents/camo',col:{a:'#a37a4c',b:'#7a5a36',d:'#5a4026'}},
 {t:'k',id:'karambit',n:'Karambit',r:1,img:'knives/karambit'},
 {t:'k',id:'bowie',n:'Bowie Knife',r:1,def:1,eq:1,img:'knives/bowie'},
@@ -39,7 +39,7 @@ if(bad&&raw){try{localStorage.setItem('pigstrike_bak',raw)}catch(e){}}return s}
 let S=loadSave();
 const save=()=>{try{localStorage.setItem('pigstrike',JSON.stringify(S))}catch(e){}};
 /* ---------- DATA ---------- */
-const RAR=[['Consumer Grade','#b0c3d9'],['Industrial Grade','#5e98d9'],['Mil-Spec','#4b69ff'],['Restricted','#8847ff'],['Classified','#d32ce6'],['Legendary','#eb4b4b'],['Secret','#ffd700']];
+const RAR=[['Consumer Grade','#b0c3d9'],['Industrial Grade','#5e98d9'],['Mil-Spec','#4b69ff'],['Restricted','#8847ff'],['Classified','#d32ce6'],['Legendary','#eb4b4b'],['Secret','#050505']];
 const MAPS=[
 {n:'Mirage',u:0,m:1,sp:1,dec:0,sky:['#f6c27a','#e9a15b','#b9794a'],gr:'#c89a62',gd:'#8d6a3f',c:'#d9b27a'},
 {n:'Inferno',u:500,m:1.3,sp:1,dec:1,sky:['#f58a4a','#c9562f','#5a2a2a'],gr:'#7a4a3a',gd:'#4a2a22',c:'#b5533a'},
@@ -78,12 +78,12 @@ function smp(k,fb){const a=au();if(!a||S.mute||S.vol<=0)return;const o=SMP[k];if
 const SFX={jump:()=>smp('jump',()=>tone(300,.18,'square',.1,700)),land:()=>smp('land',()=>tone(140,.12,'sine',.3,60)),coin:()=>{tone(880,.08,'triangle',.2);setTimeout(()=>tone(1320,.12,'triangle',.2),60)},pass:()=>tone(520,.1,'sine',.15,780),tick:()=>tone(900,.03,'square',.08),click:()=>tone(660,.05,'square',.1),over:()=>tone(300,.7,'sawtooth',.2,50),open:()=>playCase(),rare:r=>{for(let i=0;i<r+3;i++)setTimeout(()=>tone(400*Math.pow(1.26,i),.25,'triangle',.25),i*90)}};
 /* ---------- DRAWING: ITEMS ---------- */
 const AS={},GI={},KI={},KC={},SPR={a:AS,g:GI,k:KI};
-SKINS.forEach(o=>{const i=new Image();if(o.t=='a'){AN[o.id]=o.col;i.onload=()=>{try{top_()}catch(e){}}}i.src='assets/'+o.img+'.webp';SPR[o.t][o.id]=i});
+SKINS.forEach(o=>{const i=new Image();if(o.t=='a'){AN[o.id]=o.col;i.onload=()=>{try{top_()}catch(e){}}}if(o.z)i.z=o.z;i.src='assets/'+o.img+'.webp';SPR[o.t][o.id]=i});
 const CRATE='assets/ui/crate.webp';const CRI=new Image();CRI.src=CRATE;
 const crUI=c=>'assets/ui/crate-'+(c&&c.t||'a')+'.webp';['a','k','g'].forEach(t=>{new Image().src=crUI({t})});
 function kimg(s,f){const IM=KI[s];if(!IM||!IM.naturalWidth)return null;const ck=s+f;if(KC[ck])return KC[ck];const w=IM.naturalWidth,h=IM.naturalHeight,cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d');x.drawImage(IM,0,0);const d=x.getImageData(0,0,w,h),p=d.data,F=FIN[f],hx=q=>[1,3,5].map(i=>parseInt(q.substr(i,2),16)),A=hx(F.c[0]),B=hx(F.c[1]);
 for(let i=0;!(f==0&&s!='karambit')&&i<p.length;i+=4){const r=p[i],g=p[i+1],l=p[i+2];if(p[i+3]&&Math.abs(r-g)<25&&Math.abs(g-l)<30&&r>130&&r<205){const t=((i/4)%w)/w;for(let k=0;k<3;k++)p[i+k]=A[k]+(B[k]-A[k])*t}}x.putImageData(d,0,0);return KC[ck]=cv}
-function knife(c,s,f,L=70){if(KI[s]){const cv=kimg(s,f);if(cv){const sc=L*(L>74?1.35:.95)/cv.width,w=cv.width*sc,h=cv.height*sc;c.save();c.scale(-1,1);c.rotate(s=='karambit'?Math.PI/2:-Math.PI/2);if(s=='butterfly')c.rotate(-.6);c.drawImage(cv,-w*.3,-h*.55,w,h);c.restore();return}}const F=FIN[f],g=c.createLinearGradient(-10,0,10,0);g.addColorStop(0,F.c[0]);g.addColorStop(1,F.c[1]);c.save();c.lineJoin='round';
+function knife(c,s,f,L=70){if(KI[s]){const cv=kimg(s,f);if(cv){const sc=L*(L>74?1.35:.95)/cv.width,w=cv.width*sc,h=cv.height*sc;c.save();c.scale(-1,1);c.rotate(s=='karambit'?Math.PI/2:-Math.PI/2);if(s=='butterfly')c.rotate(-.6);if(s=='butterfly'){c.scale(1,-1);c.drawImage(cv,-w*.3,-h*.45,w,h)}else c.drawImage(cv,-w*.3,-h*.55,w,h);c.restore();return}}const F=FIN[f],g=c.createLinearGradient(-10,0,10,0);g.addColorStop(0,F.c[0]);g.addColorStop(1,F.c[1]);c.save();c.lineJoin='round';
 if(s=='butterfly'){[-.55,.55].forEach(a=>{c.save();c.rotate(a);c.fillStyle='#2a2f38';c.beginPath();c.roundRect(-5,2,10,34,4);c.fill();c.fillStyle=F.c[0];c.fillRect(-5,12,10,3);c.restore()})}
 else{c.fillStyle='#2a2f38';c.beginPath();c.roundRect(-6,0,12,30,4);c.fill();c.fillStyle=F.c[0];c.fillRect(-6,10,12,3);if(s=='skeleton'){c.strokeStyle=F.c[0];c.lineWidth=2;for(let y=14;y<30;y+=5){c.beginPath();c.moveTo(-6,y);c.lineTo(6,y+3);c.stroke()}}c.fillStyle='#59616f';c.fillRect(-11,-2,22,5)}
 if(s=='karambit'){c.strokeStyle='#8c97a6';c.lineWidth=3;c.beginPath();c.arc(0,34,6,0,7);c.stroke()}
@@ -102,7 +102,7 @@ const el=(x,y,a,b,col,rot=0)=>{c.fillStyle=col;c.beginPath();c.ellipse(x,y,a,b,r
 if(k=='pig'||k=='fox'){const big=k=='fox'?1.5:1;[-1,1].forEach(s=>{c.fillStyle=k=='fox'?A.b:A.b;c.beginPath();c.moveTo(s*8,-r+6);c.lineTo(s*30,-r-12*big);c.lineTo(s*31,-r+16);c.fill();if(k=='fox'){c.fillStyle=A.d;c.beginPath();c.moveTo(s*20,-r-4);c.lineTo(s*30,-r-12*big);c.lineTo(s*26,-r+4);c.fill()}})}
 if(k=='panda'||k=='bear')[-1,1].forEach(s=>el(s*24,-26,10,10,k=='panda'?'#222':A.b));
 if(k=='fox')el(-r-4,8,16,10,A.b,-.4);
-const g=c.createRadialGradient(-10,-12,4,0,0,r);g.addColorStop(0,A.a);g.addColorStop(1,A.b);c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,7);const sp=AS[k],dk=sp&&sp.naturalWidth;if(!dk)c.fill();c.shadowBlur=0;if(dk){const h=84*sp.naturalHeight/sp.naturalWidth,z=Math.min(1,92/h);c.drawImage(sp,-42*z,-40,84*z,Math.round(h*z))}
+const g=c.createRadialGradient(-10,-12,4,0,0,r);g.addColorStop(0,A.a);g.addColorStop(1,A.b);c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,7);const sp=AS[k],dk=sp&&sp.naturalWidth;if(!dk)c.fill();c.shadowBlur=0;if(dk){const h=84*sp.naturalHeight/sp.naturalWidth,hc=Math.min(h,84),z=hc/h*(sp.z||1),hh=h*z;c.drawImage(sp,-42*z,-40+hc-hh,84*z,Math.round(hh))}
 if(k=='pig'){el(22,6,12,9,'#ff9bb0');el(19,6,2.2,3.5,'#a03a58');el(26,6,2.2,3.5,'#a03a58');el(2,10,6,4,'#ff8aa5')}
 if(k=='chick'){c.fillStyle='#f2b630';[-6,0,6].forEach((x,i)=>{c.beginPath();c.moveTo(x-3,-r+3);c.lineTo(x+(i-1)*3,-r-14);c.lineTo(x+3,-r+3);c.fill()});c.fillStyle='#ff8a1a';c.beginPath();c.moveTo(28,0);c.lineTo(44,6);c.lineTo(28,12);c.fill();el(-24,6,7,12,A.b,.3)}
 if(k=='panda'){el(5,-9,8,10,'#222',.3);el(24,-9,8,10,'#222',-.3);el(34,6,4,3,'#222')}
@@ -247,7 +247,7 @@ function inv(){panel('INVENTORY',b=>{const T={a:'Agents',k:'Knives',g:'Gloves'},
 const g=E('div','gr'),list=Object.values(ITEM).filter(i=>i.t==tab).sort((a,b)=>a.r-b.r);if(tab=='g')list.unshift({id:null,t:'g',n:'No gloves',r:0,none:1});
 list.forEach(it=>{const own=it.none||S.inv[it.id],on=S.eq[tab]==it.id,d=E('div','cd'+(own?'':' lk')+(on?' eq':''));d.style.setProperty('--c',RAR[it.r][1]);d.append(icon(it,130),E('b','',it.none||own?it.n.replace(' | ','<br>'):'???'),E('small','',own?(on?'EQUIPPED':S.inv[it.id]>1?'×'+S.inv[it.id]:'&nbsp;'):'LOCKED'));if(own){const go=()=>{S.eq[tab]=it.id;save();SFX.click();inv()};d.onclick=go;kbd(d,go)}g.append(d)});b.append(g)})}
 function caseInfo(c){const ids=Object.values(ITEM).filter(i=>!i.nd&&i.t==c.t),w=cprob(c,ids),T=w.reduce((a,b)=>a+b),p=[],ch={};ids.forEach((i,k)=>{p[i.r]=(p[i.r]||0)+w[k]/T;ch[i.id]=w[k]/T});const seen={},show=[],nm=i=>i.t=='k'?i.n.split(' | ')[0].replace(/ Knife$/,''):i.n.split(' | ').pop();ids.slice().sort((a,b)=>b.r-a.r).forEach(i=>{const k=i.t=='k'?nm(i):i.id;if(!seen[k]&&show.length<3){seen[k]=1;show.push(i)}});return{p,show,nm,ch}}
-const TN={a:'Agent',k:'Knife',g:'Gloves'},pc=v=>{v*=100;return(v>=10?Math.round(v):v>=1?v.toFixed(1):v.toFixed(2))+'%'};
+const TN={a:'Agent',k:'Knife',g:'Gloves'},pc=v=>{v*=100;return(v>=1?+v.toFixed(1):v.toFixed(2))+'%'};
 function cases(pg){panel('SHOP',b=>{const sec=t=>E('div','sct',`<h2>${t}</h2>`),big=E('div','sbg'),sm=E('div','ssm'),L=E('div','sb'),R=E('div','sr');
 CS.forEach((c,i)=>{const{p,show,nm,ch}=caseInfo(c),tr=p.length-1;
 const d=E('div','si',`<div class=sw></div><div class=sv><img alt="" src="${crUI(c)}"></div><div class=sd><h3>${c.n}</h3><p>Top: ${RAR[tr][0]} ${pc(p[tr])}</p></div>`);d.style.setProperty('--c',c.col);d.tabIndex=0;d.setAttribute('role','button');
@@ -277,7 +277,7 @@ const up=()=>{const t=c.p*q,ok=S.$>=t;qn.textContent='×'+q;op.textContent=ok?'O
 mi.onclick=()=>{if(q>1){q--;SFX.click();up()}};pl.onclick=()=>{if(q<MAXQ&&S.$>=c.p*(q+1)){q++;SFX.click();up()}};op.onclick=()=>{if(S.$>=c.p*q){SFX.click();openCase(ci,q)}};
 $('#cdb').onclick=()=>{SFX.click();ov.className='ui hid'};sq.append(mi,qn,pl);up()}
 function buyGem(id){const it=ITEM[id];if(!it||!it.gem||S.inv[id]||S.gems<it.gem)return;S.gems-=it.gem;S.inv[id]=1;save();top_();SFX.rare(it.r);const col=RAR[it.r][1];
-ov.className='ui';rvbg(col);ov.innerHTML=`<div class=rv style="--c:${col}"><div class=rays></div><div class=glow></div><h3 class=rb style="color:${col}">${RAR[it.r][0].toUpperCase()}</h3><div id=bg></div><h2>${it.n}</h2><p>NEW AGENT UNLOCKED!</p><div class=row><button class=b id=eqp>EQUIP</button><button class="b s" id=cl>COLLECT</button></div></div>`;
+ov.className='ui';rvbg(col);ov.innerHTML=`<div class=rv style="--c:${col}"><div class=rays></div><div class=glow></div><h3 class=rb style="color:${col=='#050505'?'#fff':col}">${RAR[it.r][0].toUpperCase()}</h3><div id=bg></div><h2>${it.n}</h2><p>NEW AGENT UNLOCKED!</p><div class=row><button class=b id=eqp>EQUIP</button><button class="b s" id=cl>COLLECT</button></div></div>`;
 $('#bg').append(icon(it,240));$('#bg').style.filter=`drop-shadow(0 0 ${10+it.r*6}px ${col})`;$('#eqp').onclick=()=>{S.eq[it.t]=id;save();SFX.click();ov.className='ui hid';cases(1)};$('#cl').onclick=()=>{ov.className='ui hid';SFX.click();cases(1)}}
 function openCase(ci,q=1){const c=CS[ci];q=Math.max(1,Math.min(10,q|0));if(S.$<c.p*q)return;au();loadCase();S.$-=c.p*q;save();top_();const wins=[];for(let k=0;k<q;k++)wins.push(roll(ci));S.pend=q>1?wins:wins[0];save();const N=46,WI=38;
 /* one reel per opened case; many reels are laid out in 1-2 columns and zoomed so they all fit on screen */
@@ -288,7 +288,7 @@ for(let i=0;i<N;i++){const it=ITEM[i==WI?win:roll(ci)],d=E('div','ri');d.style.b
 SFX.open();trs.forEach(tr=>{tr.style.transform='translateX(0)'});trs[0].offsetWidth;trs.forEach(tr=>{tr.style.transition='transform 3.2s cubic-bezier(.12,.7,.1,1)';tr.style.transform=`translateX(${-(WI*138+65-RW/2+(Math.random()*80-40))}px)`});
 let last=-1;const iv=setInterval(()=>{const m=new DOMMatrix(getComputedStyle(trs[0]).transform),i=Math.floor((RW/2-m.m41)/138);if(i!=last){last=i;SFX.tick()}},30);setTimeout(()=>{clearInterval(iv);trs.forEach(tr=>tr.children[WI].classList.add('win'))},3300);setTimeout(()=>reveal(wins,c),4400)}
 function reveal(x,c){if(Array.isArray(x)&&x.length>1)return revealMulti(x,c);const id=[].concat(x)[0],it=ITEM[id],col=RAR[it.r][1],dup=S.inv[id];S.inv[id]=(dup||0)+1;const rf=dup?REF[it.r]:0;S.$+=rf;delete S.pend;save();SFX.rare(it.r);
-rvbg(col);ov.innerHTML=`<div class=rv style="--c:${col}"><div class=rays></div><div class=glow></div><h3 class=rb style="color:${col}">${RAR[it.r][0].toUpperCase()}</h3><div id=bg></div><h2>${it.n}</h2><p>${dup?'Duplicate → +$'+rf:'NEW ITEM!'}</p><div class=row><button class=b id=eqp>EQUIP</button><button class="b s" id=cl>COLLECT</button></div></div>`;$('#bg').append(icon(it,240));$('#bg').style.filter=`drop-shadow(0 0 ${10+it.r*6}px ${col})`;$('#eqp').onclick=()=>{S.eq[it.t]=id;save();SFX.click();ov.className='ui hid';cases()};$('#cl').onclick=()=>{ov.className='ui hid';SFX.click();cases()}}
+rvbg(col);ov.innerHTML=`<div class=rv style="--c:${col}"><div class=rays></div><div class=glow></div><h3 class=rb style="color:${col=='#050505'?'#fff':col}">${RAR[it.r][0].toUpperCase()}</h3><div id=bg></div><h2>${it.n}</h2><p>${dup?'Duplicate → +$'+rf:'NEW ITEM!'}</p><div class=row><button class=b id=eqp>EQUIP</button><button class="b s" id=cl>COLLECT</button></div></div>`;$('#bg').append(icon(it,240));$('#bg').style.filter=`drop-shadow(0 0 ${10+it.r*6}px ${col})`;$('#eqp').onclick=()=>{S.eq[it.t]=id;save();SFX.click();ov.className='ui hid';cases()};$('#cl').onclick=()=>{ov.className='ui hid';SFX.click();cases()}}
 function revealMulti(ids,c){let tot=0,nw=0;const cells=ids.map(id=>{const it=ITEM[id],dup=S.inv[id];S.inv[id]=(dup||0)+1;const rf=dup?REF[it.r]:0;S.$+=rf;tot+=rf;if(!dup)nw++;return{it,dup,rf}});delete S.pend;save();
 cells.sort((x,y)=>x.it.r-y.it.r);const n=cells.length,top=cells[n-1].it.r;
 rvbg(RAR[top][1]);ov.innerHTML=`<div class=rv><h3 style="color:#f5a524">${n} CASES OPENED</h3><div class=rg></div><p id=sm class=hd></p><div class="row hd" id=rw><button class=b id=cl>COLLECT</button></div></div>`;
