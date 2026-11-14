@@ -10,7 +10,7 @@ Hra si sama vybere rozložení podle obrazovky. Na **PC** (okno na šířku) bě
 
 **Překážky:** bodce na zdech, dřevěné bedny a kuřata, která létají sem a tam přes šachtu.
 
-**Sběratelné věci:** mince ($), modré diamanty (víc peněz) a štít, který tě jednou zachrání.
+**Sběratelné věci:** mince ($), modré diamanty (víc peněz a navíc 1 gem) a štít, který tě jednou zachrání.
 
 **Hrát:** https://wallstrike.vercel.app/
 
@@ -32,7 +32,7 @@ Kombo (sbírání mincí a prolétávání překážek bez pádu) násobí výd�
 
 - **Play** – začne běh.
 - **Inventory** – vybereš si agenta, nůž a rukavice (zamčené věci získáš z bedýnek).
-- **Cases** – za mince otevřeš bedýnku s náhodným skinem. Duplikát ti vrátí část peněz.
+- **Shop** – dvě stránky (přejeď doprava, klikni na záložku nebo použij ←/→). Na první otevřeš za mince bedýnku s náhodným skinem (duplikát vrátí část peněz), na druhé, **Gem Shopu**, koupíš za gemy velmi vzácné agenty (Ghost, Midas, Void), kteří z bedýnek nepadají.
 - **Maps** – seznam map a odměn; mapa se odemyká dosaženým skóre.
 - **Settings** – hlasitost, zvuk, celá obrazovka a reset postupu.
 
