@@ -73,7 +73,7 @@ CLAUDE.md               pravidla a přehled pro práci na projektu
 
 ## Přidání nového skinu
 
-1. Přidej průhledné PNG do `assets/agents/`, `assets/gloves/` nebo `assets/knives/` (agenti ~200 px široké, rukavice ~180 px, nože ~260 px vodorovně, rukojeť vlevo, hrot vpravo).
+1. Přidej průhledné WebP do `assets/agents/`, `assets/gloves/` nebo `assets/knives/` (agenti ~200 px široké, rukavice ~180 px, nože ~260 px vodorovně, rukojeť vlevo, hrot vpravo).
 2. Přidej jeden řádek do tabulky `SKINS` v `js/game.js` (typ, id, jméno, rarita, cesta k obrázku, barvy).
 3. Přidej nový soubor do `FILES` v `sw.js` a zvyš verzi cache `V`.
 

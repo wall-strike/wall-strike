@@ -14,19 +14,19 @@ Arkádová hra do prohlížeče (jedna stránka): hráč skáče mezi dvěma zdm
 
 Soubory:
 - `index.html` – jen kostra stránky. Styly jsou v `css/style.css`, celá herní logika v `js/game.js` (zhruba 50 KB). `js/game.js` čti po částech (`sed -n`, `grep -n`), nevypisuj ho celý.
-- `assets/` – všechny obrázky, písmo a zvuk: `agents/`, `knives/`, `gloves/`, `ui/` (logo, coin, spike, crate, shield), `digits/`, `fonts/` (`MojeRuka.ttf`), `icons/` (PWA ikony, favicon), `audio/`. Název souboru = klíč položky (např. `assets/agents/camo.png`).
+- `assets/` – všechny obrázky, písmo a zvuk: `agents/`, `knives/`, `gloves/`, `ui/` (logo, coin, spike, crate, shield), `digits/`, `fonts/` (`MojeRuka.ttf`), `icons/` (PWA ikony, favicon), `audio/`. Název souboru = klíč položky (např. `assets/agents/camo.webp`).
 - `sw.js` – service worker (cache). `manifest.webmanifest` (zůstává v kořeni, `start_url` a `scope` jsou relativní k němu).
-- Hra načítá obrázky ze souborů, takže ji spouštěj přes `http://localhost` (např. `python3 -m http.server`), ne z `file://` (canvas by byl kvůli `getImageData` zablokovaný).
+- Hra načítá obrázky (WebP; ikony PWA zůstávají PNG) ze souborů, takže ji spouštěj přes `http://localhost` (např. `python3 -m http.server`), ne z `file://` (canvas by byl kvůli `getImageData` zablokovaný).
 
 ## Důležité součásti kódu (v `js/game.js`)
 - **Data položek:** tabulka `SKINS` (jeden řádek = jeden skin), z ní se skládají `ITEM`, `POOL`, `add()`, `DEF`, `AS`/`GI`/`KI` a barvy agentů v `AN`; rarity `RAR`; váhy dropu `WT`; vrácení za duplikát `REF`; bedýnky `CS`.
 - **Agenti** (typ `a`): sprite v `AS`, barvy v `AN`. **Nože** (typ `k`): sprity v `KI`, finishe `FIN` (jeden řádek v `SKINS` se rozvine na všechny finishe). **Rukavice** (typ `g`): sprity v `GI`.
-- **Kreslení:** `animal()`, `knife()`, `glove()`, `icon()`, `drw()`, `scene()`. Mapa může mít wallpaper: v `MAPS` pole `bg` (PNG pod `assets/`, rozložení [levá zeď | koridor | pravá zeď]) a `bw` (šířka levé zdi a koridoru v px); kreslí ho `bgs()` a `wall()`. Zatím jen Dust II (`assets/maps/dust2.png`).
+- **Kreslení:** `animal()`, `knife()`, `glove()`, `icon()`, `drw()`, `scene()`. Mapa může mít wallpaper: v `MAPS` pole `bg` (WebP pod `assets/`, rozložení [levá zeď | koridor | pravá zeď]) a `bw` (šířka levé zdi a koridoru v px); kreslí ho `bgs()` a `wall()`. Zatím jen Dust II (`assets/maps/dust2.webp`).
 - **Herní logika:** `spawn()`, `coinsArc()`, `fixCoins()`, `upd()`, `pick()`, `pass()`, `end()`.
 - **Uložení:** objekt `S` v `localStorage` pod klíčem `pigstrike` (starý název, **neměnit bez migrace**).
 
 ## Jak přidat nový skin
-1. Sprite jako průhledné PNG (bílé pozadí pryč, oříznuté) do `assets/agents/`, `assets/gloves/` nebo `assets/knives/`. Agenti ~200 px široké, rukavice ~180, nože ~260 vodorovně **rukojeť vlevo, hrot vpravo**.
+1. Sprite jako průhledné WebP (bezeztrátové, `cwebp -lossless` nebo PIL `lossless=True`) (bílé pozadí pryč, oříznuté) do `assets/agents/`, `assets/gloves/` nebo `assets/knives/`. Agenti ~200 px široké, rukavice ~180, nože ~260 vodorovně **rukojeť vlevo, hrot vpravo**.
 2. Přidat jeden řádek do `SKINS` (komentář nad tabulkou vysvětluje pole): `t` typ (`a`/`k`/`g`), `id`, `n` jméno, `r` rarita, `img` cesta pod `assets/`, `col` barvy (agent `{a,b,d}`, rukavice `[hlavní,tmavá]`). Hráč začíná jen se třemi výchozími položkami (Camo, Bowie Knife, Sport Gloves Default); všechno ostatní se získává jen z bedýnek, takže `def:1` dávej jen výjimečně. Výchozí položka: `def:1` (nepadá z bedýnek, dostanou ji i staří hráči), `eq:1` navíc znamená vybavená na čisté hře.
 3. Přidat nový soubor do `FILES` v `sw.js` a zvýšit verzi cache `V`.
 4. Zkontrolovat ve hře (inventář, bedýnky) a přepočítat ekonomiku bedýnek (viz Ekonomika).
