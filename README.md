@@ -32,7 +32,7 @@ Kombo (sbírání mincí a prolétávání překážek bez pádu) násobí výd�
 
 - **Play** – začne běh.
 - **Inventory** – vybereš si agenta, nůž a rukavice (zamčené věci získáš z bedýnek).
-- **Shop** – dvě stránky (přejeď doprava, klikni na záložku nebo použij ←/→). Na první otevřeš za mince bedýnku s náhodným skinem (duplikát vrátí část peněz), na druhé, **Gem Shopu**, koupíš za gemy velmi vzácné agenty (Ghost, Midas, Void), kteří z bedýnek nepadají.
+- **Shop** – dvě stránky (přejeď doprava, klikni na záložku nebo použij ←/→). Na první se po kliknutí na bedýnku nejdřív ukážou šance všech předmětů a až pak ji otevřeš za mince (duplikát vrátí část peněz). Na druhé, **Gem Shopu**, koupíš za 500 gemů agenty Monesy, ZywOo a Donk.
 - **Maps** – seznam map a odměn; mapa se odemyká dosaženým skóre.
 - **Settings** – hlasitost, zvuk, celá obrazovka a reset postupu.
 
