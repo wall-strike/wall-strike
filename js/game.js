@@ -58,7 +58,7 @@ SKINS.forEach(o=>{if(o.t=='a')add({id:'a:'+o.id,t:'a',k:o.id,n:o.n,r:o.r,gem:o.g
 else if(o.t=='k'){add({id:SID(o),t:'k',s:o.id,f:0,n:o.n+' | Default',r:o.def?0:o.r,nd:!!o.def});for(let f=1;f<9;f++)add({id:`k:${o.id}:${f}`,t:'k',s:o.id,f,n:o.n+' | '+FIN[f].n,r:Math.min(6,o.r+FIN[f].t)})}
 else add({id:SID(o),t:'g',n:o.n,r:o.r,c:o.col,img:o.id,nd:!!o.def})});
 {const D=DEF(),RM={'a:ghost':150,'a:midas':300,'a:void':500};for(const id in RM)if(S.inv[id]){S.gems+=RM[id];delete S.inv[id]}for(const id in D.inv)S.inv[id]=S.inv[id]||1;['a','k'].forEach(t=>{if(!ITEM[S.eq[t]]||!S.inv[S.eq[t]])S.eq[t]=D.eq[t]});if(S.eq.g&&(!ITEM[S.eq.g]||!S.inv[S.eq.g]))S.eq.g=null}
-const CS=[{n:'Agent Case',p:380,b:1.5,col:'#d32ce6',t:'a',d:'For your player<br>Unlock new agents'},{n:'Knife Case',p:260,b:1.6,col:'#eb4b4b',t:'k',d:'Unlock a new knife<br>and its skins'},{n:'Gloves Case',p:320,b:1.5,col:'#ffd700',t:'g',d:'Unlock new gloves'}];
+const CS=[{n:'Agent Case',p:400,b:1.5,col:'#d32ce6',t:'a',d:'For your player<br>Unlock new agents'},{n:'Knife Case',p:300,b:1.6,col:'#eb4b4b',t:'k',d:'Unlock a new knife<br>and its skins'},{n:'Gloves Case',p:400,b:1.5,col:'#ffd700',t:'g',d:'Unlock new gloves'}];
 const WT=[45,28,16,7,3,.8,.2],REF=[5,10,20,40,70,120,200];
 const cprob=(c,ids)=>{const fx=ids.reduce((a,i)=>a+(i.fix||0),0),w=ids.map(i=>i.fix?0:WT[i.r]*Math.pow(c.b,i.r)),T=w.reduce((a,b)=>a+b);return ids.map((i,k)=>T?i.fix||w[k]/T*(1-fx):(i.fix||0)/(fx||1))};
 if(S.pend){const pl=[].concat(S.pend);delete S.pend;pl.forEach(pid=>{if(ITEM[pid]){const dp=S.inv[pid];S.inv[pid]=(dp||0)+1;if(dp)S.$+=REF[ITEM[pid].r]}});save()}
