@@ -78,3 +78,19 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .hd{opacity:0;pointer-events:none}#sm,#rw{transition:opacity .4s}.rg{cursor:pointer}
 .fx{position:absolute;inset:0;pointer-events:none;opacity:0;animation:fx .7s ease-out}@keyframes fx{0%{opacity:.5}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.ri.pop,.fx{animation:none}}
+
+/* cases screen: what can drop + odds, balance always visible */
+#top{z-index:2}
+.cg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.cg .card{width:auto;padding:14px 18px 18px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.cs .cp{height:80px;display:flex;align-items:center;justify-content:center}.cs .cp img{height:80px;width:auto;filter:drop-shadow(0 0 14px var(--c))}
+.cs .ct h3{margin:0;font-size:26px}.cs p{margin:2px 0 0;min-height:0;font-size:19px;line-height:1.1;color:var(--tx);opacity:.8}
+.cw{display:flex;gap:8px;justify-content:center;width:100%}
+.wi{flex:1;max-width:104px;padding:6px 2px 4px;border-radius:8px;background:#ffffff0d;border-bottom:3px solid var(--c);text-align:center;display:flex;flex-direction:column;align-items:center}
+.wi small{font-size:14px;line-height:1.1;color:var(--tx);opacity:.85;white-space:nowrap}
+.co{width:100%;display:flex;flex-direction:column;gap:4px;align-items:center;font-size:18px}
+.ob{display:flex;gap:2px;width:100%;height:8px;border-radius:4px;overflow:hidden}.ob i{display:block;min-width:4px}
+.ca{width:100%;margin-top:auto}.cs .qr{margin:0 0 8px}.cs .qr .b{width:76px;min-height:60px;font-size:38px}.cs .qn{font-size:32px;min-width:64px}.cs .ca .b:not(.sm){width:100%;min-height:64px;padding:12px;font-size:28px}
+.nt{color:var(--mu);font-size:18px;margin:12px 0 0}
+.pt .cg{grid-template-columns:1fr}
+.pt .cs .cp,.pt .cs .cp img{height:64px}
