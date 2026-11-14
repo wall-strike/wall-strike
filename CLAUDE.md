@@ -14,7 +14,7 @@ Arkádová hra do prohlížeče (jedna stránka): hráč skáče mezi dvěma zdm
 
 Soubory:
 - `index.html` – jen kostra stránky. Styly jsou v `css/style.css`, celá herní logika v `js/game.js` (zhruba 50 KB). `js/game.js` čti po částech (`sed -n`, `grep -n`), nevypisuj ho celý.
-- `assets/` – všechny obrázky, písmo a zvuk: `agents/`, `knives/`, `gloves/`, `ui/` (logo, coin, spike, crate, shield, `crate-a/k/g` = truhla pro každou kategorii bedýnek, `gem` = diamant), `digits/`, `fonts/` (`MojeRuka.ttf`), `icons/` (PWA ikony, favicon), `audio/`. Název souboru = klíč položky (např. `assets/agents/camo.webp`).
+- `assets/` – všechny obrázky, písmo a zvuk: `agents/`, `knives/`, `gloves/`, `ui/` (logo, coin, spike, crate, shield, `crate-a/k/g` = truhla pro každou kategorii bedýnek, `gem` = diamant), `digits/`, `fonts/` (`MojeRuka.ttf`), `icons/` (PWA ikony, favicon), `audio/` (case-open, `jump` a `land` = nahrávky bez šumu; `SMP`/`smp()` v `js/game.js`, při nenačtení záskok syntetický tón). Název souboru = klíč položky (např. `assets/agents/camo.webp`).
 - `sw.js` – service worker (cache). `manifest.webmanifest` (zůstává v kořeni, `start_url` a `scope` jsou relativní k němu).
 - Hra načítá obrázky (WebP; ikony PWA zůstávají PNG) ze souborů, takže ji spouštěj přes `http://localhost` (např. `python3 -m http.server`), ne z `file://` (canvas by byl kvůli `getImageData` zablokovaný).
 
