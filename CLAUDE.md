@@ -23,12 +23,12 @@ Soubory:
 - **Agenti** (typ `a`): sprite v `AS`, barvy v `AN`. **Nože** (typ `k`): sprity v `KI`, finishe `FIN` (jeden řádek v `SKINS` se rozvine na všechny finishe). **Rukavice** (typ `g`): sprity v `GI`.
 - **Kreslení:** `animal()`, `knife()`, `glove()`, `icon()`, `drw()`, `scene()`. Mapa může mít wallpaper: v `MAPS` pole `bg` (WebP pod `assets/`, rozložení [levá zeď | koridor | pravá zeď]) a `bw` (šířka levé zdi a koridoru v px); kreslí ho `bgs()` a `wall()`. Zatím jen Dust II (`assets/maps/dust2.webp`).
 - **Herní logika:** `spawn()`, `coinsArc()`, `fixCoins()`, `upd()`, `pick()`, `pass()`, `end()`.
-- **Obchod (SHOP):** `cases()` skládá dvě stránky přes `shopPages()` (vodorovný scroll-snap, záložky, šipky a klávesy ←/→ přes `shopPg()`): 0 = bedýnky, 1 = Gem Shop.
+- **Obchod (SHOP):** `cases()` skládá dvě stránky přes `shopPages()` (vodorovný scroll-snap, záložky, šipky a klávesy ←/→ přes `shopPg()`): 0 = bedýnky, 1 = Gem Shop. Kliknutí na bedýnku otevře stránku šancí `caseDetail()` (množství + OPEN), teprve z ní jde `openCase()`. Obrazovky bedýnek (`#ov.cs`) jsou neprůhledné a barva pozadí se bere z `--c` přes `rvbg()` (barva bedýnky při otevírání, barva rarity u odměny).
 - **Uložení:** objekt `S` v `localStorage` pod klíčem `pigstrike` (starý název, **neměnit bez migrace**).
 
 ## Jak přidat nový skin
 1. Sprite jako průhledné WebP (bezeztrátové, `cwebp -lossless` nebo PIL `lossless=True`) (bílé pozadí pryč, oříznuté) do `assets/agents/`, `assets/gloves/` nebo `assets/knives/`. Agenti ~200 px široké, rukavice ~180, nože ~260 vodorovně **rukojeť vlevo, hrot vpravo**.
-2. Přidat jeden řádek do `SKINS` (komentář nad tabulkou vysvětluje pole): `t` typ (`a`/`k`/`g`), `id`, `n` jméno, `r` rarita, `img` cesta pod `assets/`, `col` barvy (agent `{a,b,d}`, rukavice `[hlavní,tmavá]`). Hráč začíná jen se třemi výchozími položkami (Camo, Bowie Knife, Sport Gloves Default); všechno ostatní se získává jen z bedýnek, takže `def:1` dávej jen výjimečně. `gem:N` (jen agenti) = skin se prodává jen na stránce Gem Shop za N gemů a nepadá z bedýnek. Výchozí položka: `def:1` (nepadá z bedýnek, dostanou ji i staří hráči), `eq:1` navíc znamená vybavená na čisté hře.
+2. Přidat jeden řádek do `SKINS` (komentář nad tabulkou vysvětluje pole): `t` typ (`a`/`k`/`g`), `id`, `n` jméno, `r` rarita, `img` cesta pod `assets/`, `col` barvy (agent `{a,b,d}`, rukavice `[hlavní,tmavá]`). Hráč začíná jen se třemi výchozími položkami (Camo, Bowie Knife, Sport Gloves Default); všechno ostatní se získává jen z bedýnek, takže `def:1` dávej jen výjimečně. `gem:N` (jen agenti) = skin se navíc prodává na stránce Gem Shop za N gemů (z bedýnky padá dál). Výchozí položka: `def:1` (nepadá z bedýnek, dostanou ji i staří hráči), `eq:1` navíc znamená vybavená na čisté hře.
 3. Přidat nový soubor do `FILES` v `sw.js` a zvýšit verzi cache `V`.
 4. Zkontrolovat ve hře (inventář, bedýnky) a přepočítat ekonomiku bedýnek (viz Ekonomika).
 Pozn.: `kimg()` má natvrdo výjimku pro nůž `karambit` (přebarvení finishe Default). Nový nůž ji nemá.
@@ -49,7 +49,7 @@ Pozn.: `kimg()` má natvrdo výjimku pro nůž `karambit` (přebarvení finishe 
 
 ## Ekonomika (neměň bez dohody, hlídej poměry)
 - Ceny bedýnek: Agent 380, Knife 260, Gloves 320. Vrácení za duplikát (`REF`) musí být **vždy hluboko pod cenou bedýnky**, jinak vznikne nekonečné vydělávání. Po každé změně položek nebo `REF` spočítej průměrné vrácení pro každou bedýnku a ověř, že je výrazně nižší než její cena.
-- **Gemy** (`S.gems`): druhá měna, 1 gem za každý modrý diamant (`c.g`) nasbíraný za běh, připíše se na konci runu v `end()`. Utrácí se jen v Gem Shopu (druhá stránka obchodu, `gemPage()`, `buyGem()`) za agenty s `gem:N` (Ghost 150, Midas 300, Void 500). Diamant padá zhruba v 12 % oblouků mincí. Ceny nejsou odladěné na reálné hraní, uprav je v `SKINS`.
+- **Gemy** (`S.gems`): druhá měna, 1 gem za každý modrý diamant (`c.g`) nasbíraný za běh, připíše se na konci runu v `end()`. Utrácí se jen v Gem Shopu (druhá stránka obchodu, `gemPage()`, `buyGem()`) za agenty s `gem:N` (Monesy, ZywOo a Donk po 500; padají i z Agent Case, takže by jinak byla prázdná). Diamant padá zhruba v 12 % oblouků mincí. Ceny nejsou odladěné na reálné hraní, uprav je v `SKINS`.
 - Příjem: hodnota mince = `1` (zlatá `8`) × násobič kombo × násobič mapy. Bonus na konci runu 1,5 % skóre × mapa.
 - Do bedýnky nikdy nedávej jedinou položku (po prvním otevření je vždy duplikát).
 
