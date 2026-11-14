@@ -21,7 +21,7 @@ Soubory:
 ## Důležité součásti kódu (v `js/game.js`)
 - **Data položek:** tabulka `SKINS` (jeden řádek = jeden skin), z ní se skládají `ITEM`, `POOL`, `add()`, `DEF`, `AS`/`GI`/`KI` a barvy agentů v `AN`; rarity `RAR`; váhy dropu `WT`; vrácení za duplikát `REF`; bedýnky `CS`.
 - **Agenti** (typ `a`): sprite v `AS`, barvy v `AN`. **Nože** (typ `k`): sprity v `KI`, finishe `FIN` (jeden řádek v `SKINS` se rozvine na všechny finishe). **Rukavice** (typ `g`): sprity v `GI`.
-- **Kreslení:** `animal()`, `knife()`, `glove()`, `icon()`, `drw()`, `scene()`.
+- **Kreslení:** `animal()`, `knife()`, `glove()`, `icon()`, `drw()`, `scene()`. Mapa může mít wallpaper: v `MAPS` pole `bg` (PNG pod `assets/`, rozložení [levá zeď | koridor | pravá zeď]) a `bw` (šířka levé zdi a koridoru v px); kreslí ho `bgs()` a `wall()`. Zatím jen Dust II (`assets/maps/dust2.png`).
 - **Herní logika:** `spawn()`, `coinsArc()`, `fixCoins()`, `upd()`, `pick()`, `pass()`, `end()`.
 - **Uložení:** objekt `S` v `localStorage` pod klíčem `pigstrike` (starý název, **neměnit bez migrace**).
 
@@ -38,7 +38,7 @@ Pozn.: `kimg()` má natvrdo výjimku pro nůž `karambit` (přebarvení finishe 
 - Změnu dělej co nejmenší a cílenou. Neopravuj „při té příležitosti“ nesouvisející věci, jen je navrhni.
 - Před přepsáním textu v `js/game.js` (nebo `css/style.css`) ověř, že hledaný řetězec je v souboru právě jednou. Při úpravě skriptem použij kontrolu počtu výskytů.
 - Žádné neošetřené `localStorage`/`JSON.parse`, vždy `try/catch`.
-- Po změně obrázků nebo souborů v cache zvyš verzi v `sw.js` (`wall-strike-vN`, teď v18) a nový soubor přidej do `FILES`.
+- Po změně obrázků nebo souborů v cache zvyš verzi v `sw.js` (`wall-strike-vN`, teď v19) a nový soubor přidej do `FILES`.
 
 ## Uložení (localStorage)
 - Uložení se při startu načítá přes `loadSave()`, která ověřuje tvar (typy `inv`, `eq`, čísla). Poškozený nebo neúplný záznam se před opravou zazálohuje do klíče `pigstrike_bak`. Nové pole v `S` přidej i sem.
@@ -61,7 +61,6 @@ Změnu vždy spusť, nestačí kód přečíst. Headless prohlížeč je dostupn
 ## Známé problémy (nevydávej za opravené)
 - Výběr mapy v menu Maps nemá vliv na hru: `S.map` se při startu i v `newRun()` nastaví na 0 a mapa se mění jen podle skóre.
 - Mince se mohou generovat v dráze pily (možná záměr).
-- Gloves Case obsahuje jedinou položku (Vice).
 - Kvalita vykreslování (`QL`) se při zpomalení jen snižuje a nevrací.
 - Komentář se style guide v `js/game.js` pořád říká PIG STRIKE (starý název). README už je přepsané.
 
