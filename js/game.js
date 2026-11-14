@@ -16,6 +16,8 @@ const SKINS=[
 {t:'a',id:'donk',n:'Donk',r:6,gem:500,fix:.0025,img:'agents/donk',col:{a:'#efd8d0',b:'#c9a89a',d:'#54463a'}},
 {t:'a',id:'curly',n:'ZywOo',r:5,gem:500,fix:.0025,img:'agents/curly',col:{a:'#e8a888',b:'#c88868',d:'#5a2f1a'}},
 {t:'a',id:'monesy',n:'Monesy',r:4,gem:500,fix:.0025,img:'agents/monesy',col:{a:'#e0bda7',b:'#c49a80',d:'#5a3a22'}},
+{t:'a',id:'ropz',n:'ropz',r:4,gem:500,fix:.0025,img:'agents/ropz',col:{a:'#e2c3c3',b:'#c49a9a',d:'#7a3a12'}},
+{t:'a',id:'frozen',n:'frozen',r:4,gem:500,fix:.0025,img:'agents/frozen',col:{a:'#e2c3c3',b:'#c49a9a',d:'#7a3a12'}},
 {t:'a',id:'camo',n:'Camo',r:0,def:1,fill:1,eq:1,img:'agents/camo',col:{a:'#a37a4c',b:'#7a5a36',d:'#5a4026'}},
 {t:'k',id:'karambit',n:'Karambit',r:1,img:'knives/karambit'},
 {t:'k',id:'bowie',n:'Bowie Knife',r:1,def:1,eq:1,img:'knives/bowie'},
@@ -81,7 +83,7 @@ const CRATE='assets/ui/crate.webp';const CRI=new Image();CRI.src=CRATE;
 const crUI=c=>'assets/ui/crate-'+(c&&c.t||'a')+'.webp';['a','k','g'].forEach(t=>{new Image().src=crUI({t})});
 function kimg(s,f){const IM=KI[s];if(!IM||!IM.naturalWidth)return null;const ck=s+f;if(KC[ck])return KC[ck];const w=IM.naturalWidth,h=IM.naturalHeight,cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d');x.drawImage(IM,0,0);const d=x.getImageData(0,0,w,h),p=d.data,F=FIN[f],hx=q=>[1,3,5].map(i=>parseInt(q.substr(i,2),16)),A=hx(F.c[0]),B=hx(F.c[1]);
 for(let i=0;!(f==0&&s!='karambit')&&i<p.length;i+=4){const r=p[i],g=p[i+1],l=p[i+2];if(p[i+3]&&Math.abs(r-g)<25&&Math.abs(g-l)<30&&r>130&&r<205){const t=((i/4)%w)/w;for(let k=0;k<3;k++)p[i+k]=A[k]+(B[k]-A[k])*t}}x.putImageData(d,0,0);return KC[ck]=cv}
-function knife(c,s,f,L=70){if(KI[s]){const cv=kimg(s,f);if(cv){const sc=L*(L>74?1.35:.95)/cv.width,w=cv.width*sc,h=cv.height*sc;c.save();c.scale(-1,1);c.rotate(s=='karambit'||s=='butterfly'?Math.PI/2:-Math.PI/2);c.drawImage(cv,-w*.3,-h*.55,w,h);c.restore();return}}const F=FIN[f],g=c.createLinearGradient(-10,0,10,0);g.addColorStop(0,F.c[0]);g.addColorStop(1,F.c[1]);c.save();c.lineJoin='round';
+function knife(c,s,f,L=70){if(KI[s]){const cv=kimg(s,f);if(cv){const sc=L*(L>74?1.35:.95)/cv.width,w=cv.width*sc,h=cv.height*sc;c.save();c.scale(-1,1);c.rotate(s=='karambit'?Math.PI/2:-Math.PI/2);if(s=='butterfly')c.rotate(-.6);c.drawImage(cv,-w*.3,-h*.55,w,h);c.restore();return}}const F=FIN[f],g=c.createLinearGradient(-10,0,10,0);g.addColorStop(0,F.c[0]);g.addColorStop(1,F.c[1]);c.save();c.lineJoin='round';
 if(s=='butterfly'){[-.55,.55].forEach(a=>{c.save();c.rotate(a);c.fillStyle='#2a2f38';c.beginPath();c.roundRect(-5,2,10,34,4);c.fill();c.fillStyle=F.c[0];c.fillRect(-5,12,10,3);c.restore()})}
 else{c.fillStyle='#2a2f38';c.beginPath();c.roundRect(-6,0,12,30,4);c.fill();c.fillStyle=F.c[0];c.fillRect(-6,10,12,3);if(s=='skeleton'){c.strokeStyle=F.c[0];c.lineWidth=2;for(let y=14;y<30;y+=5){c.beginPath();c.moveTo(-6,y);c.lineTo(6,y+3);c.stroke()}}c.fillStyle='#59616f';c.fillRect(-11,-2,22,5)}
 if(s=='karambit'){c.strokeStyle='#8c97a6';c.lineWidth=3;c.beginPath();c.arc(0,34,6,0,7);c.stroke()}
@@ -100,7 +102,7 @@ const el=(x,y,a,b,col,rot=0)=>{c.fillStyle=col;c.beginPath();c.ellipse(x,y,a,b,r
 if(k=='pig'||k=='fox'){const big=k=='fox'?1.5:1;[-1,1].forEach(s=>{c.fillStyle=k=='fox'?A.b:A.b;c.beginPath();c.moveTo(s*8,-r+6);c.lineTo(s*30,-r-12*big);c.lineTo(s*31,-r+16);c.fill();if(k=='fox'){c.fillStyle=A.d;c.beginPath();c.moveTo(s*20,-r-4);c.lineTo(s*30,-r-12*big);c.lineTo(s*26,-r+4);c.fill()}})}
 if(k=='panda'||k=='bear')[-1,1].forEach(s=>el(s*24,-26,10,10,k=='panda'?'#222':A.b));
 if(k=='fox')el(-r-4,8,16,10,A.b,-.4);
-const g=c.createRadialGradient(-10,-12,4,0,0,r);g.addColorStop(0,A.a);g.addColorStop(1,A.b);c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,7);const sp=AS[k],dk=sp&&sp.naturalWidth;if(!dk)c.fill();c.shadowBlur=0;if(dk)c.drawImage(sp,-42,-40,84,Math.round(84*sp.naturalHeight/sp.naturalWidth));
+const g=c.createRadialGradient(-10,-12,4,0,0,r);g.addColorStop(0,A.a);g.addColorStop(1,A.b);c.fillStyle=g;c.beginPath();c.arc(0,0,r,0,7);const sp=AS[k],dk=sp&&sp.naturalWidth;if(!dk)c.fill();c.shadowBlur=0;if(dk){const h=84*sp.naturalHeight/sp.naturalWidth,z=Math.min(1,92/h);c.drawImage(sp,-42*z,-40,84*z,Math.round(h*z))}
 if(k=='pig'){el(22,6,12,9,'#ff9bb0');el(19,6,2.2,3.5,'#a03a58');el(26,6,2.2,3.5,'#a03a58');el(2,10,6,4,'#ff8aa5')}
 if(k=='chick'){c.fillStyle='#f2b630';[-6,0,6].forEach((x,i)=>{c.beginPath();c.moveTo(x-3,-r+3);c.lineTo(x+(i-1)*3,-r-14);c.lineTo(x+3,-r+3);c.fill()});c.fillStyle='#ff8a1a';c.beginPath();c.moveTo(28,0);c.lineTo(44,6);c.lineTo(28,12);c.fill();el(-24,6,7,12,A.b,.3)}
 if(k=='panda'){el(5,-9,8,10,'#222',.3);el(24,-9,8,10,'#222',-.3);el(34,6,4,3,'#222')}
@@ -303,7 +305,7 @@ $('#cl').onclick=()=>{clearTimeout(tm);ov.className='ui hid';SFX.click();cases()
 function maps(){panel('MAPS',b=>{const w=E('div','big');MAPS.forEach((m,i)=>{const un=S.best>=m.u,d=E('div','card'+(S.map==i?' sel':'')+(un?'':' off'),`<div class=mp style="background:${m.bg?`linear-gradient(#0003,#0003),url(assets/${m.bg}.webp) center/cover`:`linear-gradient(${m.sky[0]},${m.sky[1]} 60%,${m.gr})`}">${m.n}</div><p>${un?'Payout x'+m.m+' · '+MODS[i]:'LOCKED · Reach score '+m.u}</p>`);d.style.setProperty('--c',m.c);d.style.cursor=un?'pointer':'default';if(un){const go=()=>{S.map=i;save();SFX.click();maps()};d.onclick=go;kbd(d,go)}w.append(d)});b.append(w)})}
 let rs=0;function sets(){panel('SETTINGS',b=>{const d=E('div','set',`<label>Volume <input type=range min=0 max=100 value=${S.vol*100}></label>`);d.querySelector('input').oninput=e=>{S.vol=e.target.value/100;save();SFX.click()};
 const mu=E('button','b s sm',S.mute?'SOUND: OFF':'SOUND: ON');mu.onclick=()=>{S.mute=!S.mute;save();sets();SFX.click()};const rb=E('button','b d sm',rs?'CLICK AGAIN TO CONFIRM':'RESET PROGRESS');rb.onclick=()=>{if(rs){S=DEF();save();rs=0;toMenu();pn.className='ui hid'}else{rs=1;sets()}};
-const fb=E('button','b s sm','FULLSCREEN (F)');fb.onclick=()=>{SFX.click();fsT()};d.append(mu,fb,rb,E('p','','<small style="color:#8b95a8">Tap the opposite half = long jump · tap your own wall side = hop · tap in air = 2x jump. Keys: SPACE/W jump, A/D or arrows pick a side, S/↓ slide, P/TAB/ESC pause (R restart, Q end run), M mute, F fullscreen. Menus: arrows/TAB move, ENTER select, ESC back, 1-5 shortcuts. Shield pickup saves you once.</small>'));b.append(d)})}
+const fb=E('button','b s sm','FULLSCREEN (F)');fb.onclick=()=>{SFX.click();fsT()};d.append(mu,fb,rb,E('p','','<small style="color:#8b95a8">Tap the opposite half = long jump · tap your own wall side = hop · tap in air = 2x jump. Keys: SPACE/W jump, A/D or arrows pick a side, S/↓ slide, P/TAB/ESC pause (R restart, L lobby, Q end run), M mute, F fullscreen. Menus: arrows/TAB move, ENTER select, ESC back, 1-5 shortcuts. Shield pickup saves you once.</small>'));b.append(d)})}
 /* ---------- LOOP / INPUT ---------- */
 /* keyboard: play = jump/slide/pause; menus = arrows/WASD move focus, ENTER/SPACE select, ESC goes back, 1-9 pick a menu item/tab, TAB cycles (hidden and covered layers are inert) */
 let kb=0;const shown=e=>!e.classList.contains('hid'),vis=e=>e&&e.offsetParent&&!e.closest('.hd'),
@@ -319,7 +321,7 @@ if(tg.tagName=='INPUT'&&(c.startsWith('Arrow')||c=='Home'||c=='End'))return;
 if(mode=='play'&&(d||ent||c=='Tab'))e.preventDefault();if(e.repeat&&(mode=='play'||!d))return;
 if(c=='KeyF'){fsT();return}
 if(c=='KeyM'){S.mute=!S.mute;save();SFX.click();if(shown(pn)&&pn.querySelector('.ph h2').textContent=='SETTINGS')sets();return}
-if(mode=='play'){if(G.pause){if(c=='KeyP'||c=='Tab'||ent||c=='Escape')G.pause=0;else if(c=='KeyQ'){G.pause=0;die(1)}else if(c=='KeyR')play();return}
+if(mode=='play'){if(G.pause){if(ent&&bt&&ov.contains(bt))bt.click();else if(c=='KeyP'||c=='Tab'||ent||c=='Escape')G.pause=0;else if(c=='KeyQ'){G.pause=0;die(1)}else if(c=='KeyR')play();else if(c=='KeyL'&&pzOn)$('#pzl').click();else if(d)mv(ov,d[0],d[1]);return}
 if(c=='KeyP'||c=='Tab'||c=='Escape'){if(!G.dead)G.pause=1;return}
 if(c=='Space'||c=='ArrowUp'||c=='KeyW')jump(0);else if(c=='ArrowLeft'||c=='KeyA')jump(-1);else if(c=='ArrowRight'||c=='KeyD')jump(1);else if(c=='ArrowDown'||c=='KeyS')slide();return}
 const ly=shown(ov)?ov:shown(pn)?pn:mode=='menu'?menu:null,$o=q=>ov.querySelector(q);
@@ -356,7 +358,16 @@ let fpsN=0,fpsT=0;const fpsE=document.createElement('div');fpsE.id='fps';documen
 function loop(now){requestAnimationFrame(loop);fpsN++;if(!fpsT)fpsT=now;else if(now-fpsT>=500){fpsE.textContent=Math.round(fpsN*1000/(now-fpsT));fpsN=0;fpsT=now}try{loopBody(now)}catch(e){try{console.error(e)}catch(_){}}}
 function loopBody(now){const raw=now-last,dt=Math.min(.05,raw/1000);last=now;X.setTransform(RK,0,0,RK,0,0);fe=fe*.95+Math.min(raw,100)*.05;if(++fc>30){fc=0;if(fe>24&&QL>.55){QL-=.15;fit()}}const m=MAPS[S.map],t=now/1000;if(bgm!==S.map){bgm=S.map;bgsync()}
 if(mode=='menu'){off+=70*dt;scene(m,off,t);X.save();X.translate(PT?W/2:380,PT?H*.36:480);X.scale(PT?3.2:3.8,PT?3.2:3.8);animal(X,ITEM[S.eq.a].k,{t,ph:t*5,ka:-.35+Math.sin(t*2)*.1});X.restore();fx(m)}
-else if(G){if(!G.pause)upd(dt);drw(m,t);if(G.pause){X.fillStyle='#000b';X.fillRect(0,0,W,H);X.fillStyle='#fff';X.textAlign='center';X.font='900 80px "MojeRuka","Segoe UI",Arial';X.fillText('PAUSED',W/2,H/2-10);X.font='700 '+(PT?20:26)+'px "MojeRuka","Segoe UI",Arial';X.fillText('TAP / SPACE / ESC = RESUME · Q = END RUN',W/2,H/2+50)}}}
+else if(G){if(!G.pause)upd(dt);drw(m,t)}pz()}
+// pause menu: DOM overlay shown while G.pause is set (G.pause is flipped from many places, so it is synced here)
+let pzOn=0;
+function pz(){const w=mode=='play'&&G&&G.pause&&!G.dead?1:0;
+if(w&&!pzOn){pzOn=1;ov.className='ui pz';ov.style.removeProperty('--c');ov.innerHTML='<div class=rv><h1>PAUSED</h1><div class=col><button class=b id=pzr>RESUME</button><button class="b s" id=pzt>RESTART</button><button class="b s" id=pzs></button><button class="b s" id=pzl>LOBBY</button></div><p class=mu><small>ESC resume · R restart · M sound · L lobby · Q end run</small></p></div>';
+$('#pzr').onclick=()=>{SFX.click();G.pause=0};$('#pzt').onclick=play;$('#pzs').onclick=()=>{S.mute=!S.mute;save();SFX.click()};
+// lobby keeps the run's earnings: same payout as a finished run, just without the game over screen
+$('#pzl').onclick=()=>{SFX.click();G.dead=true;end();toMenu()};if(kb)$('#pzr').focus()}
+else if(!w&&pzOn){pzOn=0;if(mode=='play')ov.className='ui hid'}
+if(pzOn){const s=$('#pzs'),t='SOUND: '+(S.mute?'OFF':'ON');if(s&&s.textContent!=t)s.textContent=t}}
 let bgm=-1;function bgsync(){const m=MAPS[S.map],v=`linear-gradient(#000b,#000d),radial-gradient(ellipse at 50% 35%,${m.sky[1]},transparent 75%),linear-gradient(${m.sky[0]},${m.sky[1]} 55%,${m.sky[2]})`;document.documentElement.style.background=v;document.body.style.background=v}
 const dec=i=>{try{return i.decode?i.decode().catch(()=>{}):Promise.resolve()}catch(e){return Promise.resolve()}};
 let booted=0;const boot=()=>{if(booted)return;booted=1;last=performance.now();fc=-30;mainMenu();top_();requestAnimationFrame(loop)};
