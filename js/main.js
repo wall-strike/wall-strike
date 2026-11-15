@@ -123,7 +123,7 @@ const boot = () => {
     top_();
     requestAnimationFrame(loop);
 };
-S.map = 0;
+S.map = S.pick;
 Promise.race([Promise.all([[SPK, CN, CRI, CKI, ...MAPS.map(m => m.im).filter(Boolean), ...Object.values(AS), ...Object.values(GI), ...Object.values(KI), ...Object.values(DGI).flat()].map(dec), (() => {
             try {
                 return document.fonts ? document.fonts.load('800 24px MojeRuka').catch(() => {
