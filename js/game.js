@@ -42,7 +42,7 @@ function spikeHit(o) {
 }
 function newRun() {
     loadSmp();
-    S.map = 0;
+    S.map = S.pick;
     G = { t: 0, cam: 0, x: LX + R, y: 230, vx: 0, vy: 0, side: -1, jumps: 0, maxY: 230, sq: 0, bonus: 0, score: 0, cash: 0, gems: 0, combo: 0, ct: 0, obs: [], coins: [], pts: [], txt: [], ny: 980, dead: false, pause: 0, sh: 0, inv: 0, tr: [], dt: 0, shake: 0, sl: 0, face: 1, dn: 0 };
 }
 function mult() {
@@ -661,7 +661,7 @@ function play() {
     newRun();
 }
 function toMenu() {
-    S.map = 0;
+    S.map = S.pick;
     mode = 'menu';
     ov.className = 'ui hid';
     pn.className = 'ui hid';
