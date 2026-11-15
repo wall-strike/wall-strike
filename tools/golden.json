@@ -1,0 +1,196 @@
+{
+ "static": {
+  "items": 37,
+  "skins": 13,
+  "maps": 10,
+  "pools": [
+   1,
+   5,
+   6,
+   4,
+   8,
+   5,
+   6
+  ],
+  "economy": [
+   {
+    "n": "Agent Case",
+    "price": 400,
+    "items": 6,
+    "avgRefund": 8.7625
+   },
+   {
+    "n": "Knife Case",
+    "price": 300,
+    "items": 26,
+    "avgRefund": 35.5453
+   },
+   {
+    "n": "Gloves Case",
+    "price": 400,
+    "items": 3,
+    "avgRefund": 36.4662
+   }
+  ]
+ },
+ "ui": {
+  "menu": "2bc062f942",
+  "INVENTORY": "f9aa9b0511",
+  "INVENTORY/tab0": "f9aa9b0511",
+  "INVENTORY/tab1": "9f098750f7",
+  "INVENTORY/tab2": "bdc6b9fa1c",
+  "SHOP": "efaf9beb6d",
+  "SHOP/tab0": "efaf9beb6d",
+  "SHOP/tab1": "0977ba06ed",
+  "caseDetail": "01ebdffe8d",
+  "MAPS": "54a9116c5a",
+  "SETTINGS": "01be5471e8"
+ },
+ "sim": {
+  "rolls": "a:camo,k:karambit:5,g:violet,a:camo,k:bowie:2,g:violet,a:camo,k:butterfly:0,g:pinkrush,a:camo,k:bowie:2,g:pinkrush,a:camo,k:butterfly:5,g:violet,a:camo,k:bowie:2,g:vice,a:camo,k:butterfly:2,g:violet,a:camo,k:butterfly:1,g:violet,a:camo,k:karambit:1,g:violet,a:camo,k:butterfly:0,g:vice,a:camo,k:karambit:1,g:violet,a:camo,k:karambit:6,g:vice,a:donk,k:bowie:7,g:pinkrush,a:camo,k:bowie:4,g:violet,a:camo,k:karambit:0,g:violet,a:camo,k:bowie:4,g:pinkrush,a:camo,k:karambit:4,g:vice,a:camo,k:butterfly:0,g:vice,a:camo,k:butterfly:2,g:violet,a:camo,k:karambit:2,g:vice,a:camo,k:butterfly:0,g:violet,a:camo,k:bowie:1,g:vice,a:camo,k:butterfly:6,g:pinkrush,a:camo,k:karambit:5,g:vice,a:camo,k:karambit:2,g:violet,a:camo,k:butterfly:1,g:pinkrush,a:camo,k:butterfly:0,g:vice,a:camo,k:butterfly:4,g:vice,a:camo,k:butterfly:4,g:violet,a:ropz,k:bowie:3,g:violet,a:camo,k:bowie:4,g:pinkrush,a:camo,k:butterfly:6,g:pinkrush,a:camo,k:bowie:1,g:vice,a:camo,k:butterfly:7,g:violet,a:camo,k:karambit:0,g:violet,a:camo,k:bowie:1,g:vice,a:camo,k:karambit:6,g:pinkrush,a:camo,k:bowie:4,g:violet,a:camo,k:karambit:0,g:pinkrush,a:frozen,k:bowie:6,g:pinkrush,a:camo,k:karambit:7,g:vice,a:camo,k:karambit:7,g:vice,a:camo,k:bowie:4,g:vice,a:camo,k:bowie:4,g:vice,a:camo,k:butterfly:5,g:pinkrush,a:camo,k:butterfly:0,g:violet,a:camo,k:butterfly:2,g:violet,a:camo,k:butterfly:2,g:pinkrush,a:camo,k:butterfly:4,g:violet,a:camo,k:karambit:4,g:violet,a:donk,k:karambit:2,g:vice,a:camo,k:bowie:7,g:vice,a:camo,k:butterfly:4,g:violet,a:camo,k:bowie:4,g:violet,a:camo,k:bowie:4,g:pinkrush,a:camo,k:bowie:1,g:violet,a:camo,k:karambit:1,g:violet,a:camo,k:butterfly:0,g:pinkrush,a:camo,k:bowie:4,g:vice,a:camo,k:karambit:2,g:vice,a:camo,k:karambit:0,g:violet,a:camo,k:butterfly:4,g:pinkrush,a:camo,k:bowie:1,g:violet,a:camo,k:karambit:7,g:vice,a:camo,k:butterfly:0,g:vice,a:camo,k:bowie:1,g:violet,a:ropz,k:bowie:6,g:violet,a:camo,k:butterfly:0,g:violet,a:camo,k:karambit:0,g:vice,a:camo,k:karambit:0,g:vice,a:camo,k:karambit:1,g:violet,a:camo,k:karambit:0,g:pinkrush,a:camo,k:bowie:1,g:violet,a:camo,k:butterfly:4,g:vice,a:camo,k:karambit:1,g:violet,a:camo,k:butterfly:0,g:vice,a:camo,k:bowie:2,g:violet,a:camo,k:bowie:6,g:vice,a:camo,k:karambit:3,g:violet,a:camo,k:karambit:1,g:pinkrush,a:camo,k:bowie:3,g:violet,a:camo,k:bowie:2,g:pinkrush,a:camo,k:bowie:7,g:violet,a:camo,k:karambit:4,g:vice,a:camo,k:karambit:1,g:vice,a:camo,k:karambit:0,g:pinkrush,a:camo,k:karambit:1,g:vice,a:camo,k:bowie:5,g:violet,a:camo,k:butterfly:0,g:vice,a:camo,k:karambit:1,g:pinkrush,a:camo,k:butterfly:3,g:vice,a:camo,k:butterfly:1,g:pinkrush,a:camo,k:butterfly:3,g:vice,a:camo,k:butterfly:3,g:violet,a:camo,k:bowie:3,g:vice,a:camo,k:butterfly:3,g:vice,a:camo,k:karambit:1,g:pinkrush,a:camo,k:bowie:1,g:pinkrush,a:camo,k:karambit:7,g:violet,a:camo,k:butterfly:1,g:pinkrush",
+  "deaths": 0,
+  "maxScore": 7746,
+  "cp": [
+   {
+    "f": 1500,
+    "deaths": 0,
+    "t": 25,
+    "x": 409.1,
+    "y": 2965.09,
+    "maxY": 3077.91,
+    "score": 731,
+    "cash": 100,
+    "gems": 0,
+    "combo": 40,
+    "obs": 5,
+    "coins": 16,
+    "ny": 4123.25,
+    "dead": false,
+    "side": 0
+   },
+   {
+    "f": 3000,
+    "deaths": 0,
+    "t": 50,
+    "x": 1189.79,
+    "y": 6243.61,
+    "maxY": 6243.61,
+    "score": 1661,
+    "cash": 257,
+    "gems": 0,
+    "combo": 78,
+    "obs": 5,
+    "coins": 17,
+    "ny": 7139.52,
+    "dead": false,
+    "side": 0
+   },
+   {
+    "f": 4500,
+    "deaths": 0,
+    "t": 75,
+    "x": 1085.7,
+    "y": 10078.29,
+    "maxY": 10078.29,
+    "score": 2960,
+    "cash": 555,
+    "gems": 1,
+    "combo": 133,
+    "obs": 6,
+    "coins": 17,
+    "ny": 10949.1,
+    "dead": false,
+    "side": 0
+   },
+   {
+    "f": 6000,
+    "deaths": 0,
+    "t": 100,
+    "x": 996.79,
+    "y": 13811.89,
+    "maxY": 13908.61,
+    "score": 4337,
+    "cash": 891,
+    "gems": 1,
+    "combo": 198,
+    "obs": 9,
+    "coins": 43,
+    "ny": 15205.06,
+    "dead": false,
+    "side": 0
+   },
+   {
+    "f": 7500,
+    "deaths": 0,
+    "t": 125,
+    "x": 1100.88,
+    "y": 18241.41,
+    "maxY": 18241.41,
+    "score": 5956,
+    "cash": 1355,
+    "gems": 1,
+    "combo": 273,
+    "obs": 9,
+    "coins": 33,
+    "ny": 19435.5,
+    "dead": false,
+    "side": 0
+   },
+   {
+    "f": 9000,
+    "deaths": 0,
+    "t": 150,
+    "x": 1079.19,
+    "y": 22572.6,
+    "maxY": 22572.6,
+    "score": 7746,
+    "cash": 2120,
+    "gems": 2,
+    "combo": 368,
+    "obs": 8,
+    "coins": 19,
+    "ny": 23449.09,
+    "dead": false,
+    "side": 0
+   }
+  ],
+  "kinds": {
+   "spike": 4,
+   "saw": 2,
+   "block": 2
+  },
+  "before": {
+   "$": 0,
+   "gems": 0,
+   "best": 0
+  },
+  "after": {
+   "$": 2468,
+   "gems": 2,
+   "best": 7746
+  }
+ },
+ "save": {
+  "$": 1234,
+  "gems": 960,
+  "best": 777,
+  "eqA": "a:camo",
+  "inv": [
+   "a:camo",
+   "a:frozen",
+   "a:ropz",
+   "g:basic",
+   "k:bowie:0"
+  ],
+  "pend": null
+ },
+ "corrupt": {
+  "bak": "{broken",
+  "$": 0
+ },
+ "portrait": {
+  "PT": 1,
+  "W": 600,
+  "H": 1298
+ }
+}
