@@ -189,40 +189,12 @@ function glove(c, gl, r, A) {
 function animal(c, k, o = {}) {
     const A = AN[k], r = 34, t = o.t || 0, ph = o.ph || 0;
     c.save();
-    if (k == 'ghost') {
-        c.globalAlpha = .92;
-        c.shadowColor = '#8fe0ff';
-        c.shadowBlur = 22;
-    }
     const el = (x, y, a, b, col, rot = 0) => {
         c.fillStyle = col;
         c.beginPath();
         c.ellipse(x, y, a, b, rot, 0, 7);
         c.fill();
     };
-    if (k == 'pig' || k == 'fox') {
-        const big = k == 'fox' ? 1.5 : 1;
-        [-1, 1].forEach(s => {
-            c.fillStyle = k == 'fox' ? A.b : A.b;
-            c.beginPath();
-            c.moveTo(s * 8, -r + 6);
-            c.lineTo(s * 30, -r - 12 * big);
-            c.lineTo(s * 31, -r + 16);
-            c.fill();
-            if (k == 'fox') {
-                c.fillStyle = A.d;
-                c.beginPath();
-                c.moveTo(s * 20, -r - 4);
-                c.lineTo(s * 30, -r - 12 * big);
-                c.lineTo(s * 26, -r + 4);
-                c.fill();
-            }
-        });
-    }
-    if (k == 'panda' || k == 'bear')
-        [-1, 1].forEach(s => el(s * 24, -26, 10, 10, k == 'panda' ? '#222' : A.b));
-    if (k == 'fox')
-        el(-r - 4, 8, 16, 10, A.b, -.4);
     const g = c.createRadialGradient(-10, -12, 4, 0, 0, r);
     g.addColorStop(0, A.a);
     g.addColorStop(1, A.b);
@@ -237,98 +209,14 @@ function animal(c, k, o = {}) {
         const h = 84 * sp.naturalHeight / sp.naturalWidth, hc = Math.min(h, 84), z = hc / h * (sp.z || 1), hh = h * z;
         c.drawImage(sp, -42 * z, -40 + hc - hh, 84 * z, Math.round(hh));
     }
-    if (k == 'pig') {
-        el(22, 6, 12, 9, '#ff9bb0');
-        el(19, 6, 2.2, 3.5, '#a03a58');
-        el(26, 6, 2.2, 3.5, '#a03a58');
-        el(2, 10, 6, 4, '#ff8aa5');
-    }
-    if (k == 'chick') {
-        c.fillStyle = '#f2b630';
-        [-6, 0, 6].forEach((x, i) => {
-            c.beginPath();
-            c.moveTo(x - 3, -r + 3);
-            c.lineTo(x + (i - 1) * 3, -r - 14);
-            c.lineTo(x + 3, -r + 3);
-            c.fill();
-        });
-        c.fillStyle = '#ff8a1a';
+    for (let i = 0; i < 2; i++) {
+        const l = o.air ? -3 : Math.max(0, Math.sin(ph + i * Math.PI)) * 9;
+        el((i ? 1 : -1) * 13, r - 1 - l, 10, 7, A.d);
+        c.strokeStyle = '#0005';
+        c.lineWidth = 1.5;
         c.beginPath();
-        c.moveTo(28, 0);
-        c.lineTo(44, 6);
-        c.lineTo(28, 12);
-        c.fill();
-        el(-24, 6, 7, 12, A.b, .3);
-    }
-    if (k == 'panda') {
-        el(5, -9, 8, 10, '#222', .3);
-        el(24, -9, 8, 10, '#222', -.3);
-        el(34, 6, 4, 3, '#222');
-    }
-    if (k == 'fox') {
-        c.fillStyle = '#fff';
-        c.beginPath();
-        c.moveTo(10, 14);
-        c.lineTo(36, 6);
-        c.lineTo(28, 26);
-        c.fill();
-        el(35, 6, 4, 3.5, '#111');
-    }
-    if (k == 'bear') {
-        el(24, 8, 12, 9, '#d9b48a');
-        el(30, 5, 4, 3, '#111');
-    }
-    if (k == 'frog') {
-        [-8, 16].forEach((x, i) => {
-            el(x, -28 - i * 2, 11, 11, A.a);
-            el(x, -28 - i * 2, 9, 9, '#fff');
-            el(x + 2, -28 - i * 2, 4, 4, '#111');
-        });
-        c.strokeStyle = '#1d4a1d';
-        c.lineWidth = 2.5;
-        c.beginPath();
-        c.arc(14, 8, 16, .2, 1.3);
+        c.ellipse((i ? 1 : -1) * 13, r - 1 - l, 10, 7, 0, 0, 7);
         c.stroke();
-    }
-    if (k != 'frog' && !AS[k]) {
-        const bl = (t % 3.4) < .12;
-        [6, 22].forEach(x => {
-            if (bl) {
-                c.strokeStyle = '#111';
-                c.lineWidth = 2;
-                c.beginPath();
-                c.moveTo(x - 5, -10);
-                c.lineTo(x + 5, -10);
-                c.stroke();
-            }
-            else {
-                el(x, -10, 5.5, 6.5, '#fff');
-                el(x + 1.8, -9.5, 3, 3.6, '#111');
-                el(x + 2.6, -11, 1, 1, '#fff');
-            }
-        });
-    }
-    if (k != 'ghost')
-        for (let i = 0; i < 2; i++) {
-            const l = o.air ? -3 : Math.max(0, Math.sin(ph + i * Math.PI)) * 9;
-            el((i ? 1 : -1) * 13, r - 1 - l, 10, 7, A.d);
-            c.strokeStyle = '#0005';
-            c.lineWidth = 1.5;
-            c.beginPath();
-            c.ellipse((i ? 1 : -1) * 13, r - 1 - l, 10, 7, 0, 0, 7);
-            c.stroke();
-        }
-    if (!o.nk && k != 'ghost' && !AS[k]) {
-        c.save();
-        c.rotate(.18);
-        c.fillStyle = '#1a1d26';
-        c.beginPath();
-        c.ellipse(0, -r + 3, 20, 5, 0, 0, 7);
-        c.fill();
-        c.fillRect(-12, -r - 17, 24, 20);
-        c.fillStyle = '#c0392b';
-        c.fillRect(-12, -r - 2, 24, 4);
-        c.restore();
     }
     if (!o.nk) {
         c.save();
@@ -380,10 +268,6 @@ function icon(it, z) {
             const w = 96, h = w * gi.naturalHeight / gi.naturalWidth;
             c.drawImage(gi, -w / 2, -h / 2, w, h);
         }
-    }
-    else if (it.c) {
-        c.scale(1.7, 1.7);
-        glove(c, it, 26, AN.pig);
     }
     else {
         c.fillStyle = '#667';
