@@ -21,6 +21,9 @@ function loadSave() {
     if (('$' in r && s.$ !== r.$) || ('best' in r && s.best !== r.best))
         bad = 1;
     s.map = num(r.map, 0);
+    s.pick = Math.floor(num(r.pick, 0));
+    if (!MAPS[s.pick] || MAPS[s.pick].u > s.best)
+        s.pick = 0;
     s.gems = Math.floor(num(r.gems, 0));
     if ('gems' in r && s.gems !== r.gems)
         bad = 1;
