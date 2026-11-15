@@ -31,7 +31,7 @@ const DEF = () => {
         if (o.eq)
             eq[o.t] = SID(o);
     });
-    return { $: 0, gems: 0, best: 0, inv, eq, map: 0, vol: .6, mute: false };
+    return { $: 0, gems: 0, best: 0, inv, eq, map: 0, pick: 0, vol: .6, mute: false };
 };
 /* ---------- DATA ---------- */
 const RAR = [['Consumer Grade', '#b0c3d9'], ['Industrial Grade', '#5e98d9'], ['Mil-Spec', '#4b69ff'], ['Restricted', '#8847ff'], ['Classified', '#d32ce6'], ['Legendary', '#eb4b4b'], ['Secret', '#050505']];
