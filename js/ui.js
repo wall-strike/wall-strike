@@ -459,12 +459,12 @@ function maps() {
     panel('MAPS', b => {
         const w = E('div', 'big');
         MAPS.forEach((m, i) => {
-            const un = S.best >= m.u, d = E('div', 'card' + (S.map == i ? ' sel' : '') + (un ? '' : ' off'), `<div class=mp style="background:${m.bg ? `linear-gradient(#0003,#0003),url(assets/${m.bg}.webp) center/cover` : `linear-gradient(${m.sky[0]},${m.sky[1]} 60%,${m.gr})`}">${m.n}</div><p>${un ? 'Payout x' + m.m + ' · ' + MODS[i] : 'LOCKED · Reach score ' + m.u}</p>`);
+            const un = S.best >= m.u, d = E('div', 'card' + (S.pick == i ? ' sel' : '') + (un ? '' : ' off'), `<div class=mp style="background:${m.bg ? `linear-gradient(#0003,#0003),url(assets/${m.bg}.webp) center/cover` : `linear-gradient(${m.sky[0]},${m.sky[1]} 60%,${m.gr})`}">${m.n}</div><p>${un ? 'Payout x' + m.m + ' · ' + MODS[i] : 'LOCKED · Reach score ' + m.u}</p>`);
             d.style.setProperty('--c', m.c);
             d.style.cursor = un ? 'pointer' : 'default';
             if (un) {
                 const go = () => {
-                    S.map = i;
+                    S.pick = S.map = i;
                     save();
                     SFX.click();
                     maps();
