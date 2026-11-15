@@ -1,6 +1,34 @@
-<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><title>WALL STRIKE</title>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#07090d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Wall Strike"><meta name="application-name" content="Wall Strike"><meta name="description" content="WALL STRIKE – arkádová hra se skákáním po zdech, bedýnkami a skiny."><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="assets/icons/favicon.png"><link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-<link rel="stylesheet" href="css/style.css"></head><body>
-<div id="st"><canvas id="cv" width="1280" height="720"></canvas>
-<div id="top" class="ui"></div><div id="menu" class="ui"></div><div id="pn" class="ui hid"></div><div id="ov" class="ui hid"></div></div>
-<script src="js/game.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <title>WALL STRIKE</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#07090d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Wall Strike">
+  <meta name="application-name" content="Wall Strike">
+  <meta name="description" content="WALL STRIKE – arkádová hra se skákáním po zdech, bedýnkami a skiny.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="st"><canvas id="cv" width="1280" height="720"></canvas><div id="top" class="ui"></div><div id="menu" class="ui"></div><div id="pn" class="ui hid"></div><div id="ov" class="ui hid"></div></div>
+  <!-- Plain scripts, order matters (they share one global scope). Add new files here. -->
+  <script src="js/debug.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
