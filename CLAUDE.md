@@ -69,7 +69,7 @@ CLAUDE.md, README.md  pravidla pro Claude / popis hry pro hráče
 - **Rozměry:** canvas má pevný logický rozměr, který se jen škáluje na obrazovku. Na šířku (PC) 1536×864 (16:9), na výšku (mobil) 600×~960–1400. `W`, `H`, `LX`, `RX` se nastavují ve `layout()`. Kód nikdy nepředpokládá pevné `W`/`H`.
 - **Obrázky:** název souboru v `assets/` odpovídá klíči položky. Obrázky se načítají přes `new Image()` a před startem se předdekódují v `main.js`.
 - **Data jsou řízená tabulkou `SKINS`** (jeden řádek = jeden skin). Z ní `data.js` skládá `ITEM`, `POOL`, `DEF()`, a `sprites.js` plní `AS` (agenti), `KI` (nože), `GI` (rukavice) a barvy `AN`.
-- **Agenti** (`t:'a'`): obrázek v `AS`, barvy v `AN`. **Nože** (`t:'k'`): jeden řádek v `SKINS` se rozvine na všechny finishe `FIN` (id `k:<id>:<finish>`); výjimku pro `karambit` má natvrdo `kimg()`, nový nůž ji nemá. **Rukavice** (`t:'g'`): obrázek v `GI`, barvy `col`.
+- **Agenti** (`t:'a'`): obrázek v `AS`, barvy v `AN` (prázdný objekt, plní ho `sprites.js` ze `SKINS`; `animal()` kreslí kruh jako záložku, dokud se obrázek nenačte). **Nože** (`t:'k'`): jeden řádek v `SKINS` se rozvine na všechny finishe `FIN` (id `k:<id>:<finish>`); výjimku pro `karambit` má natvrdo `kimg()`, nový nůž ji nemá. **Rukavice** (`t:'g'`): obrázek v `GI`, barvy `col`.
 - **Mapy:** `MAPS` (odemykají se nejlepším skóre `u`). `S.pick` je mapa vybraná v menu Maps (ukládá se, `loadSave()` ji ověří proti `MAPS` a odemčení), `S.map` je mapa právě běžícího běhu. `newRun()`, `toMenu()` a start v `main.js` nastaví `S.map = S.pick`; během běhu `upd()` posouvá `S.map` jen nahoru podle skóre. Mapa může mít wallpaper: `bg` (WebP pod `assets/`, rozložení [levá zeď | koridor | pravá zeď]) a `bw` (šířky levé zdi a koridoru v px); kreslí ho `bgs()` a `wall()`. Zatím jen Dust II.
 - **Obchod:** `cases()` skládá dvě stránky přes `shopPages()` (0 = bedýnky, 1 = Gem Shop). Klik na bedýnku otevře `caseDetail()` (množství + OPEN), teprve odtud jde `openCase()`. Obrázek bedýnky je `crUI(c)` (`assets/ui/crate-<typ>.webp`; starý `crate.webp` zůstává pro překážky ve hře). Obrazovky bedýnek (`#ov.cs`) jsou neprůhledné, barva se bere z `--c` přes `rvbg()`.
 - **UI** se staví z DOM prvků (`E(tag, class, html)`) do vrstev `#top`, `#menu`, `#pn`, `#ov` nad canvasem. Styl řídí `css/style.css` (viz jeho style guide: barvy jen přes CSS proměnné, žádné nové natvrdo napsané barvy, tlačítka `.b`/`.tb`, karty `.cd .card .ri .rl`).
@@ -131,7 +131,6 @@ CLAUDE.md, README.md  pravidla pro Claude / popis hry pro hráče
 
 - Mince se mohou generovat v dráze pily (možná záměr).
 - Kvalita vykreslování (`QL`) se při zpomalení jen snižuje a nevrací.
-- V `AN` (`js/data.js`) a `animal()` (`js/sprites.js`) zůstaly barvy a kreslení starých zvířecích postav (pig, fox, frog…). Pravděpodobně už nepoužité, před smazáním ověř, co z toho hra volá.
 - Komentář nad `SKINS` v `data.js` říká „PNG“, ale obrázky jsou WebP.
 
 ## 12. Ne
