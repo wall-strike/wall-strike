@@ -56,28 +56,40 @@ a otevři `http://localhost:8000`. Service worker (offline režim) se registruje
 ## Struktura
 
 ```
-index.html              kostra stránky (načítá css/ a js/)
-css/style.css           styly hry
-js/game.js              celá herní logika a data (tabulka SKINS)
-sw.js                   service worker (cache, offline) – musí zůstat v kořeni
+index.html              kostra stránky a seznam skriptů (pořadí je důležité)
+css/style.css           styly
+js/                     herní kód, obyčejné skripty se společným globálním prostorem:
+  debug.js                sběr chyb a ?debug pomůcky
+  core.js                 konstanty, DOM odkazy, rozložení obrazovky
+  data.js                 data: skiny (tabulka SKINS), mapy, bedýnky, šance
+  save.js                 uložená hra
+  audio.js                zvuk
+  sprites.js              kreslení agentů, nožů, rukavic
+  world.js                kreslení světa a pozadí
+  game.js                 logika běhu (překážky, mince, skóre, konec hry)
+  ui.js                   menu, inventář, obchod, bedýnky, mapy, nastavení
+  input.js                klávesnice, dotyk, celá obrazovka, registrace service workeru
+  main.js                 herní smyčka, pauza, start
+assets/                 obrázky, zvuk, písmo, ikony
+sw.js                   service worker (offline cache; seznam souborů se generuje)
 manifest.webmanifest    PWA manifest
-assets/
-  agents/ knives/ gloves/   sprity skinů (název souboru = klíč položky)
-  ui/                       logo, mince, bodce, bedýnka, štít, kuře
-  digits/                   číslice
-  fonts/                    písmo MojeRuka.ttf
-  icons/                    PWA ikony a favicon
-  audio/                    zvuk otevření bedýnky
+tools/                  kontrola a test projektu (hra je nepotřebuje)
 CLAUDE.md               pravidla a přehled pro práci na projektu
 ```
 
 ## Přidání nového skinu
 
 1. Přidej průhledné WebP do `assets/agents/`, `assets/gloves/` nebo `assets/knives/` (agenti ~200 px široké, rukavice ~180 px, nože ~260 px vodorovně, rukojeť vlevo, hrot vpravo).
-2. Přidej jeden řádek do tabulky `SKINS` v `js/game.js` (typ, id, jméno, rarita, cesta k obrázku, barvy).
-3. Přidej nový soubor do `FILES` v `sw.js` a zvyš verzi cache `V`.
+2. Přidej jeden řádek do tabulky `SKINS` v `js/data.js` (typ, id, jméno, rarita, cesta k obrázku, barvy).
+3. Spusť `node tools/check.mjs --write`. Zkontroluje soubory a ekonomiku bedýnek a sám obnoví seznam souborů a verzi cache v `sw.js`.
 
 Podrobnosti a pravidla ekonomiky bedýnek jsou v `CLAUDE.md`.
+
+## Kontrola a ladění
+
+- `node tools/check.mjs` – rychlá kontrola projektu (chybějící nebo nepoužité soubory, aktuálnost `sw.js`, ekonomika bedýnek). Žádné závislosti, běží i v GitHub Actions. `--write` obnoví `sw.js`.
+- `node tools/smoke.mjs` – test v prohlížeči (potřebuje Playwright): chyby v konzoli, offline režim, načítání uložení a simulace běhu proti `tools/golden.json`.
+- `http://localhost:8000/?debug` – červený pruh s chybami a v konzoli příkazy `dbg.give(id)`, `dbg.cash(n)`, `dbg.god()` a další (výpis je v `CLAUDE.md`).
 
 ## Uložení hry
 
