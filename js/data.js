@@ -54,7 +54,7 @@ MAPS.forEach(m => {
     }
 });
 const MODS = ['Standard', 'Warm alleys', 'Faster desert', 'Mossy ruins', 'Speed +20%', 'Low gravity', 'Warehouse crates', 'Bridge run', 'Rail yard', 'Skyscraper'];
-const AN = { pig: { a: '#ffc0cb', b: '#e8869b', d: '#c4607a' }, chick: { a: '#ffe27a', b: '#f2b630', d: '#e08a1a' }, frog: { a: '#9be36a', b: '#3f9a3a', d: '#2a6a2a' }, panda: { a: '#fff', b: '#cfd5dc', d: '#222' }, fox: { a: '#ffa05a', b: '#d9591a', d: '#5a2a12' }, bear: { a: '#b07a4a', b: '#6a4128', d: '#3a2214' }, ghost: { a: '#eaf8ff', b: '#8fd0f0', d: '#bfe8ff' } };
+const AN = {};
 const FIN = [['Default', '#d7dde6', '#7d8794', -1], ['Safari Mesh', '#8a7a50', '#4a4026', 0], ['Forest DDPAT', '#5e7a45', '#2a3a22', 0], ['Blue Steel', '#6f8fb5', '#2c4260', 1], ['Crimson Web', '#d34040', '#5a1414', 2], ['Fade', '#ff9a3d', '#d83ad0', 3], ['Doppler', '#3d7dff', '#b13dff', 3], ['Slaughter', '#ff5a3d', '#7a0f0f', 3], ['Gamma Lore', '#7dff6a', '#1a8a3a', 5]].map(a => ({ n: a[0], c: [a[1], a[2]], t: a[3] }));
 const ITEM = {}, POOL = [[], [], [], [], [], [], []];
 const add = o => {
