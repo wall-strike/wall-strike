@@ -1,7 +1,7 @@
 // Service worker: offline cache (stale-while-revalidate).
 // The file list and cache version are generated: after changing, adding or removing any file run  node tools/check.mjs --write
 // <generated> by tools/check.mjs --write - do not edit by hand
-const V = 'wall-strike-9ab4df48';
+const V = 'wall-strike-5d721cd8';
 const FILES = [
   './',
   'index.html',
